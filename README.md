@@ -1,6 +1,6 @@
 # Análisis genómico 
 
-Clases de análisis genómico de la carrera de ecología de la FES Iztacala, UNAM
+Bienvenidos a la clases de análisis genómico donde aprenderemos los comandos escenciales para trabajar en Linux, R y Python.
 
 ## Horario
 
