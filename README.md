@@ -1,2 +1,7 @@
-# Analisis_genomica_ecologia
-Este repositorio tiene los elementos para la clase de análisis genómico de la materia de ecología de la FES Iztacala
+# Análisis genómico 
+
+Clases de análisis genómico de la carrera de ecología de la FES Iztacala, UNAM
+
+# Horario
+
+
