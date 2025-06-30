@@ -4,14 +4,14 @@ Bienvenidos a la clases de análisis genómico donde aprenderemos los comandos e
 
 ## Horario
 
-Lunes 14 a 17 horas /
+Lunes 14 a 17 horas 
 
 Miércoles 14 a 17 horas 
 
 Jueves 15 a 17 horas 
 
 
-Lugar: Biblioteca de la FES Iztacala, UNAM
+### Lugar: Biblioteca de la FES Iztacala, UNAM
 
 ## Objetivo
 
