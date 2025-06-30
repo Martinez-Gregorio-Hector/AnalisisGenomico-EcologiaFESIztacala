@@ -15,7 +15,7 @@ Jueves 15 a 17 horas
 
 ## Objetivo
 
-Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de progrmación para el análisis de datos genómicos usando linux, r y pyhthon.
+Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de programación para el análisis de datos genómicos usando linux, r y pyhthon.
 
 ## Temario
 
@@ -23,11 +23,15 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ### Unidad 2. R
 ### Unidad 3. Pyhton
 ### Unidad 4. Análisis genómico
+
 4.1 Análisis de genoma completo
+
 4.2 Análisis de microbioma
+
 4.3 Análisis de RAD-seq
 
 ## Dinámica de clase y evaluación
+
 
 
 
