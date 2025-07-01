@@ -25,3 +25,8 @@ El kernel es responsable de cuatro funciones principales:
 ■ Gestión del hardware
 
 ■ Gestión del sistema de archivos
+
+
+## mobaxterm
+
+
