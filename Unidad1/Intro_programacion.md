@@ -66,11 +66,34 @@ Existen varios Shell disponibles (lista no exhaustiva):
 * C shell (csh)
 * Bash shell (bash) 
 * Z shell (zsh)
-* 
+
 
 <p align="center">
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/shell.jpg?raw=true" alt="shell" width="400" height="500">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/shell.jpg?raw=true" alt="shell" width="300" height="300">
 </p>
+
+## Bash
+
+Las flechas ↑ y ↓ permiten navegar dentro del historial de los comandos. 
+
+La tecla ”tabulador” [TAB] permite auto-completar los nombres de los archivos y/o comandos. 
+
+Gestión de procesos en segundo plano (background).
+
+## Sistema de archivos
+
+El sistema de archivos representa el método con el cual el sistema operativo organiza los datos. 
+
+Incluye los archivos, y tambien los directorios ( o carpetas)
+
+El referencial de todo el sistema de archivo de una máquina es el caracter “/" 
+
+## Estructura de Linux
+
+<p align="center">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/EstructuraDeLinux.jpg?raw=true" alt="shell" width="1000" height="350">
+</p>
+
 
 
 ## mobaxterm
