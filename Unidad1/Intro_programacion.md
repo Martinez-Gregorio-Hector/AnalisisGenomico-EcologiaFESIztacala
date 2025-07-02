@@ -110,7 +110,12 @@ Descargas gratuitas de distribuciones desde:
 * Usar la terminal en entorno de Windows 10. Acceder a la terminal y comunicarnos con el servidor.
 * Usar Rstudio, en la pestaña tools, seleccionar terminal. Acceder y comunicarnos con el servidor.
 
-### Usaremos el servidor de la UNAM (no acceder después del curso). 
+### Usaremos el servidor de la UNAM (no acceder después del curso)
+
+## Conexión remota al servidor
+
+### ssh lab13@132.248.216.138
+La contraseña y el acceso al directorio se te proporcionará en el curso
 
 
 
