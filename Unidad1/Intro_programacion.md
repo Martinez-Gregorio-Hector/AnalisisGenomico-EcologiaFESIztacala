@@ -101,9 +101,17 @@ Descargas gratuitas de distribuciones desde:
 * [Ubuntu 22.04.1](https://ubuntu.com/download/desktop)
 * [Centos](https://www.centos.org/download)
 * [Fedora](http://fedoraproject.org/es/get-fedora)
-* [Biolinux] (http://environmentalomics.org/bio-linux)
 
 ## Puedes instalar MobaXterm
 [MobaXterm](https://mobaxterm.mobatek.net/download.html ) proporciona una terminal para Windows con un servidor de ambiente gráfico X11, un cliente SSH para establecer sesiones remotas seguras con un servidor, diversas herramientas de red y más. 
+
+### Otras opciones
+
+* Usar la terminal en entorno de Windows 10. Acceder a la terminal y comunicarnos con el servidor.
+* Usar Rstudio, en la pestaña tools, seleccionar terminal. Acceder y comunicarnos con el servidor.
+
+### Usaremos el servidor de la UNAM (no acceder después del curso). 
+
+
 
 
