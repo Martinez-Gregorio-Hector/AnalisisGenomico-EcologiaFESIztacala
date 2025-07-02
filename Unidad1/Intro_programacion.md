@@ -27,6 +27,14 @@ Su principal objetivo es impulsar el software de libre distribución junto con s
 |                                           | 7\. Multitarea y multiusuario                                               |
 |                                           | 8\. Administrador de paquetes                                               |
 
+## Hardware y software
+
+Hardware: Conjunto de elementos físicos o materiales que constituyen una computadora
+
+Software: Programas para realizar determinadas tareas. 
+
+
+
 
 ## mobaxterm
 
