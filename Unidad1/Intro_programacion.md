@@ -1,6 +1,9 @@
-# ¿Qué es linux?
+# Linux 
 
-El sistema de linux esta formada por 4 partes:
+## Objetivo
+
+Aprender comandos básicos del sisntema operativo Linux para aplicarlos en algoritmos de análisis genómico.
+
 
 ■ Kernel
 
