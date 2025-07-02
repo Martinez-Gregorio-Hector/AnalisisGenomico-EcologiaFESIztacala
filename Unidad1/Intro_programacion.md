@@ -12,6 +12,7 @@ Linux es un sistema operativo (SO) diseñado por cientos de programadores de tod
 
 Su principal objetivo es impulsar el software de libre distribución junto con su código fuente para que pueda ser modificado por cualquier persona.
 
+![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Timeline_of_OS.jpg)
 
 
 El núcleo del sistema Linux es el kernel. Este controla todo el hardware y el software del sistema informático, asignando hardware cuando es necesario y ejecutando software cuando se requiere.
