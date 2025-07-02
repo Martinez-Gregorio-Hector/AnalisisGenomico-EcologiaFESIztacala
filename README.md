@@ -23,6 +23,7 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ### Unidad 2. R
 ### Unidad 3. Pyhton
 ### Unidad 4. Análisis genómico
+### Unidad 5. Recursos adicionales
 
 4.1 Análisis de genoma completo
 
