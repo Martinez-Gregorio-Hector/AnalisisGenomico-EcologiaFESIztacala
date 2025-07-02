@@ -12,7 +12,10 @@ Linux es un sistema operativo (SO) diseñado por cientos de programadores de tod
 
 Su principal objetivo es impulsar el software de libre distribución junto con su código fuente para que pueda ser modificado por cualquier persona.
 
-![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Timeline_of_OS.jpg)
+<p align="center">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Timeline_of_OS.jpg?raw=true" alt="shell" />
+</p>
+
 
 ## ¿Por qué usar Linux y no Windows?
 
@@ -33,7 +36,9 @@ Hardware: Conjunto de elementos físicos o materiales que constituyen una comput
 
 Software: Programas para realizar determinadas tareas. 
 
-![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg)
+<p align="center">
+  <img src="[https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Timeline_of_OS.jpg?raw=true](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg)" alt="shell" />
+</p>
 
 ## Kernel
 
@@ -56,9 +61,12 @@ Existen varios Shell disponibles (lista no exhaustiva):
 * Korn shell (ksh) 
 * C shell (csh)
 * Bash shell (bash) 
-* Z shell (zsh) 
+* Z shell (zsh)
+* 
 
-![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/shell.jpg)
+<p align="center">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/shell.jpg?raw=true" alt="shell" />
+</p>
 
 ## mobaxterm
 
