@@ -16,11 +16,16 @@ Su principal objetivo es impulsar el software de libre distribución junto con s
 
 ## ¿Por qué usar Linux y no Windows?
 
-![image](https://github.com/user-attachments/assets/9dc8b094-7947-4c41-8073-3513f47ff472)
-
-
-
-■ Gestión del sistema de archivos
+| Ventajas de usar Windows                  | Ventajas de usar Linux                                                      |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| 1\. Es fácil de Usar                      | 1\. Software de libre distribución                                          |
+| 2\. Amplio catálogo de software comercial | 2\. Aprovechamiento de hardware                                             |
+| 3\. Compatibilidad de hardware            | 3\. Es seguro y fiable                                                      |
+|                                           | 4\. Completamente personalizable                                            |
+|                                           | 5\. Modular                                                                 |
+|                                           | 6\. Su desarrollo es independiente a los intereses de grandes corporaciones |
+|                                           | 7\. Multitarea y multiusuario                                               |
+|                                           | 8\. Administrador de paquetes                                               |
 
 
 ## mobaxterm
