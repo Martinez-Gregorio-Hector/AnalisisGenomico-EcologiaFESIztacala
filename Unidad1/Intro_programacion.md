@@ -12,7 +12,7 @@ Linux es un sistema operativo (SO) diseñado por cientos de programadores de tod
 
 Su principal objetivo es impulsar el software de libre distribución junto con su código fuente para que pueda ser modificado por cualquier persona.
 
-![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Timeline_of_OS.jpg)
+![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Timeline_of_OS.jpg)
 
 ## ¿Por qué usar Linux y no Windows?
 
@@ -33,6 +33,7 @@ Hardware: Conjunto de elementos físicos o materiales que constituyen una comput
 
 Software: Programas para realizar determinadas tareas. 
 
+![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg)
 
 
 
