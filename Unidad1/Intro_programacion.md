@@ -29,7 +29,7 @@ Su principal objetivo es impulsar el software de libre distribución junto con s
 
 ## Hardware y software
 
-Hardware: Conjunto de elementos físicos o materiales que constituyen una computadora
+Hardware: Conjunto de elementos físicos o materiales que constituyen una computadora
 
 Software: Programas para realizar determinadas tareas. 
 
