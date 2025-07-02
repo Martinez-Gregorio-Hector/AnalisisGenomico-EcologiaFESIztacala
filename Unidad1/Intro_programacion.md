@@ -100,15 +100,10 @@ El referencial de todo el sistema de archivo de una máquina es el caracter “
 Descargas gratuitas de distribuciones desde: 
 * [Ubuntu 22.04.1](https://ubuntu.com/download/desktop)
 * [Centos](https://www.centos.org/download)
-* Fedora - http://fedoraproject.org/es/get-fedora
-* Biolinux - http://environmentalomics.org/bio-linux/
-* 
-4. Puedes instalar MobaXterm, que proporciona una terminal para Windows con un servidor de ambiente gráfico X11, un cliente SSH para establecer sesiones remotas seguras con un servidor, diversas herramientas de red y más. 
-https://mobaxterm.mobatek.net/download.html 
-![image](https://github.com/user-attachments/assets/88f88e36-5cff-42ef-a4d3-e5261d4cc421)
+* [Fedora](http://fedoraproject.org/es/get-fedora)
+* [Biolinux] (http://environmentalomics.org/bio-linux)
 
-
-
-## mobaxterm
+## Puedes instalar MobaXterm
+[MobaXterm](https://mobaxterm.mobatek.net/download.html ) proporciona una terminal para Windows con un servidor de ambiente gráfico X11, un cliente SSH para establecer sesiones remotas seguras con un servidor, diversas herramientas de red y más. 
 
 
