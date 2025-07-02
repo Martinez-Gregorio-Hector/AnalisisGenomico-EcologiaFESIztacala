@@ -14,16 +14,11 @@ Su principal objetivo es impulsar el software de libre distribución junto con s
 
 ![](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Timeline_of_OS.jpg)
 
+## ¿Por qué usar Linux y no Windows?
 
-El núcleo del sistema Linux es el kernel. Este controla todo el hardware y el software del sistema informático, asignando hardware cuando es necesario y ejecutando software cuando se requiere.
+![image](https://github.com/user-attachments/assets/9dc8b094-7947-4c41-8073-3513f47ff472)
 
-El kernel es responsable de cuatro funciones principales:
 
-■ Gestión de la memoria del sistema
-
-■ Gestión de programas de software
-
-■ Gestión del hardware
 
 ■ Gestión del sistema de archivos
 
