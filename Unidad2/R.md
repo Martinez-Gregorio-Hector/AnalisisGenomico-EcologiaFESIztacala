@@ -42,7 +42,8 @@ RStudio es un entorno de desarrollo integrado (IDE) para R. Su interfaz gráfica
 
 Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options**. Una vez en **Global Options** 
 
+## Actividade
 
-
+1. Explora el menú de **Global Options**
 
 
