@@ -26,8 +26,13 @@ R y RStudio están diseñados para que muchas personas puedan aprenderlo desde c
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/RStudio1.png? raw=true" alt="shell" width="700" height="500">
 </p>
 
+## La interfaz gráfica de RStudio
 
+RStudio es un entorno de desarrollo integrado (IDE) para R. Su interfaz gráfica incluye 3 paneles principales:
 
+* Consola de R
+* Datos en el ambiente, Historial, Conecciones remotas, Git.
+* Gráficos, Archivos, Ayuda, Paqueterías
 
 <p align="center">
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/Rstudio.png? raw=true" alt="shell" width="700" height="500">
