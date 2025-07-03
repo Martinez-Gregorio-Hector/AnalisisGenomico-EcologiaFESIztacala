@@ -20,7 +20,7 @@ Al abrir RStudio la consola nos arroja el mensaje que se muestra a continuación
 
 Para citar R en alguna publicación basta con usar la función citation(). Y para conocer a todo el equipo detrás del desarrollo de R, puedes consultarlo con la función contributors(). 
 
-R y RStudio están diseñados para que muchas personas puedan aprenderlo desde cero, con tan solo este primer mensaje todo usuario podría empezar a aprender R; para empezar a aprender R intenta usar la función en tu consola de help.start() con el cual se desplegará un menú en HTML con todos los manuales para aprender a usar R, también aparecerán los manuales de todas las paqueterías del repositorio de CRAN (The Comprehensive R archive Network) así como enlaces a noticias del mundo de R
+R y RStudio están diseñados para que muchas personas puedan aprenderlo desde cero, con tan solo este primer mensaje todo usuario podría empezar a aprender R; para empezar a aprender R intenta usar la función en tu consola de help.start() con el cual se desplegará un menú en HTML con todos los manuales para aprender a usar R, también aparecerán los manuales de todas las paqueterías del repositorio de CRAN (The Comprehensive R archive Network) así como enlaces a noticias del mundo de R.
 
 <p align="center">
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/RStudio1.png? raw=true" alt="shell" width="600" height="400">
@@ -40,7 +40,7 @@ RStudio es un entorno de desarrollo integrado (IDE) para R. Su interfaz gráfica
 
 ## Opciones globales
 
-Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options**. Una vez en **Global Options** 
+Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options**. Una vez en **Global Options**.
 
 ## Actividades
 
@@ -56,7 +56,9 @@ En RStudio podemos generar todos los archivos enlístados en “New File”. El 
 
 ## Trabajando con environment
 
-* Crear dos **R scripts**. 
+### Primera actividad
+
+* Crear un **R scripts**. 
 * En un script ejecuta el siguiente código:
 
 ```
@@ -69,7 +71,22 @@ View(cats)
 
 table(cats$Sex)
 ```
+¿Qué sucede al ejecutar data(cats) y View(cats)?
 
+¿Qué formas hay desde la interfaz gráfica para importar datos?
 
+## Segunda actividad
+
+* ejecuta el siguiente código:
+
+```
+install.packages("ggplot2")
+library(ggplot2)
+
+ggplot(cats, aes(x = Sex)) + 
+    geom_bar(fill = "orange", color = "black") + theme_classic()
+
+```
+¿Cómo podemos exportar el gráfico?
 
 
