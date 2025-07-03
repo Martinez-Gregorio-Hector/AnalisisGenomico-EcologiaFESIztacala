@@ -40,18 +40,8 @@ RStudio es un entorno de desarrollo integrado (IDE) para R. Su interfaz gráfica
 
 ## Opciones globales
 
-Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options** o usar directamente el atajo de teclado, para Mac use **command** más **,** , en el caso de windows **ctrl** más **,**. 
-```
-Tools | Global Options...
+Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options**. Una vez en **Global Options** 
 
-o usar directamente el atajo de teclado
-Para Mac
-**command** + **,**
-
-Linux y windows
-ctrl + ,
-```
-Una vez accesando a las Opciones Globales podemos modificar que no se gaste memoria temporal al guardar datos o código de sesiones anteriores en la parte de General. Al quitar las “palomitas” de los pequeños cuadros de las opciones generales señaladas en los recuadros azules.
 
 
 
