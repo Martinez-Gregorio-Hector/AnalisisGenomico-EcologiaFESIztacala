@@ -46,4 +46,13 @@ Las opciones globales (Global Options…) nos permitirán cambiar aspectos visua
 
 1. Explora el menú de **Global Options**
 
+## Archivos de RStudio
+
+En RStudio podemos generar todos los archivos enlístados en “New File”. El archivo más usado para desarrollar código en R es **R Script**. Aún así RStudio nos permite hacer reportes de nuestros código con **R Notebook** y **R Markdown**, aplicaciones web con **Shiny Web App**, generar APIs con **Plumber API**, editar código en **HTML**, **C**, **C++**, **Python**, **CSS**, **JavaScript**, **Shell**, entre otros.
+
+<p align="center">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/RStudio3.png? raw=true" alt="shell" width="600" height="300">
+</p>
+
+
 
