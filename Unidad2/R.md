@@ -42,7 +42,7 @@ RStudio es un entorno de desarrollo integrado (IDE) para R. Su interfaz gráfica
 
 Las opciones globales (Global Options…) nos permitirán cambiar aspectos visuales de la organización de la interfaz gráfica. Para acceder a estas opciones debemos ir a **Tools > Global Options**. Una vez en **Global Options** 
 
-## Actividade
+## Actividades
 
 1. Explora el menú de **Global Options**
 
@@ -53,6 +53,23 @@ En RStudio podemos generar todos los archivos enlístados en “New File”. El 
 <p align="center">
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/RStudio3.png? raw=true" alt="shell" width="600" height="300">
 </p>
+
+## Trabajando con environment
+
+* Crear dos **R scripts**. 
+* En un script ejecuta el siguiente código:
+
+```
+install.packages("MASS")
+
+library(MASS)
+
+data(cats)
+View(cats)
+
+table(cats$Sex)
+```
+
 
 
 
