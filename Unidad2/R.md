@@ -77,17 +77,29 @@ table(cats$Sex)
 
 ### Segunda actividad
 
-* ejecuta el siguiente código:
+* Ejecuta el siguiente código:
 
 ```
 install.packages("ggplot2")
 library(ggplot2)
 
 ggplot(cats, aes(x = Sex)) + 
-    geom_bar(fill = "orange", color = "black") + theme_classic()
+    geom_bar(fill = "orange", color = "black") + theme_classic() 
 
 ```
 ¿Cómo podemos exportar el gráfico?
 
+### Tercera Actividad
 
+* Ejecuta el siguiente código:
 
+```
+install.packages("ggThemeAssist")
+
+g <- ggplot(cats, aes(x = Sex)) + 
+    geom_bar(fill = "orange", color = "black") + theme_classic() +
+    xlab("Sexo") + ylab("Número de Gatos") + ggtitle("Gatos")
+
+g
+```
+A continuación selecciona **g**, ve a **Addins** y da click en **ggplot Theme Assistant**. Explora los arreglos de las gráficas que puedes hacer.
