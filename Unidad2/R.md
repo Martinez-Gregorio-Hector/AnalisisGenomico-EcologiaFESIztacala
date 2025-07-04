@@ -62,7 +62,7 @@ En RStudio podemos generar todos los archivos enlístados en “New File”. El 
 * En un script ejecuta el siguiente código:
 
 ```
-install.packages("MASS")
+install.packages("MASS", dependencies=TRUE)
 
 library(MASS)
 
@@ -80,7 +80,7 @@ table(cats$Sex)
 * Ejecuta el siguiente código:
 
 ```
-install.packages("ggplot2")
+install.packages("ggplot2", dependencies=TRUE)
 library(ggplot2)
 
 ggplot(cats, aes(x = Sex)) + 
@@ -94,7 +94,7 @@ ggplot(cats, aes(x = Sex)) +
 * Ejecuta el siguiente código:
 
 ```
-install.packages("ggThemeAssist")
+install.packages("ggThemeAssist", dependencies=TRUE)
 
 g <- ggplot(cats, aes(x = Sex)) + 
     geom_bar(fill = "orange", color = "black") + theme_classic() +
