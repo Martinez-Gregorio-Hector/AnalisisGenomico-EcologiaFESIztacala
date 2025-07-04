@@ -75,7 +75,7 @@ table(cats$Sex)
 
 ¿Qué formas hay desde la interfaz gráfica para importar datos?
 
-## Segunda actividad
+### Segunda actividad
 
 * ejecuta el siguiente código:
 
@@ -88,5 +88,6 @@ ggplot(cats, aes(x = Sex)) +
 
 ```
 ¿Cómo podemos exportar el gráfico?
+
 
 
