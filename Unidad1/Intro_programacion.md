@@ -35,6 +35,11 @@ El 96.3% de los servidores del mundo usan linux, 1.9% windows y 1.8% FreeBSD.
 |                                           | 7\. Multitarea y multiusuario                                               |
 |                                           | 8\. Administrador de paquetes                                               |
 
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/NavaSuiza.jpg? raw=true" alt="shell" width="800" height="700">
+</p>
+
 ## Hardware y software
 
 Hardware: Conjunto de elementos físicos o materiales que constituyen una computadora
