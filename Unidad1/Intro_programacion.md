@@ -111,6 +111,11 @@ Descargas gratuitas de distribuciones desde:
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/MobaxTermn.png? raw=true" alt="shell" width="700" height="400">
 </p>
 
+Instalar MobaXterm
+
+#### Download -> Home Edition ->Installer Edition.
+
+Dar click en el archivo zip descargado y seguir las instrucciones de instalación.
 
 ### Otras opciones
 
