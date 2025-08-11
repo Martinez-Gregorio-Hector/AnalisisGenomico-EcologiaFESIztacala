@@ -73,8 +73,8 @@ Existen varios Shell disponibles (lista no exhaustiva):
 * Bourne shell (sh) 
 * Korn shell (ksh) 
 * C shell (csh)
-* Bash shell (bash) 
-* Z shell (zsh)
+* Bash shell (bash) - Linux
+* Z shell (zsh) - MacOS
 
 
 <p align="center">
