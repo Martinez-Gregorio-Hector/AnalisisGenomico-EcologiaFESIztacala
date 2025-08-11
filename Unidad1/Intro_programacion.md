@@ -100,6 +100,10 @@ Descargas gratuitas de distribuciones desde:
 * [Centos](https://www.centos.org/download)
 * [Fedora](http://fedoraproject.org/es/get-fedora)
 
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/DistribucionesLinux.png? raw=true" alt="shell" width="800" height="700">
+</p>
+
 ## Puedes instalar MobaXterm
 [MobaXterm](https://mobaxterm.mobatek.net/download.html ) proporciona una terminal para Windows con un servidor de ambiente gráfico X11, un cliente SSH para establecer sesiones remotas seguras con un servidor, diversas herramientas de red y más. 
 
