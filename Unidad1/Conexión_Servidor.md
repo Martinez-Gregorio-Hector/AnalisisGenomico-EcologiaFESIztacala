@@ -40,4 +40,13 @@ Una vez establecida la sesión remota al servidor, estarán trabajando en él!
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/MobaXterm_2.png? raw=true" alt="shell" >
 </p>
 
+## Estaremos trabajando en esta ruta
+
+```
+
+/home/lab13/Documents/Ecologia_AnalisisGenomico
+
+```
+
+
 
