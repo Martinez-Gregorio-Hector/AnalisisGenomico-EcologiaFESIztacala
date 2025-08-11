@@ -38,8 +38,8 @@ Asistencia 10%
 Tareas 20%
 
 Presentación de un proyecto bioinformático 70%
-(Hacer un github, script, 
-subir datos al repositorio
+
+(Hacer un github, script, subir datos al repositorio, presentación-power point)
 
 
 
