@@ -47,7 +47,7 @@ Hardware: Conjunto de elementos físicos o materiales que constituyen una comput
 Software: Programas para realizar determinadas tareas. 
 
 <p align="center">
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg? raw=true" alt="shell" width="400" height="200">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg? raw=true" alt="shell" width="700" height="300">
 </p>
 
 ## Kernel
@@ -101,7 +101,7 @@ Descargas gratuitas de distribuciones desde:
 * [Fedora](http://fedoraproject.org/es/get-fedora)
 
 <p align="center">  
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/DistribucionesLinux.png? raw=true" alt="shell" width="800" height="700">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/DistribucionesLinux.png? raw=true" alt="shell" width="300" height="500">
 </p>
 
 ## Puedes instalar MobaXterm
