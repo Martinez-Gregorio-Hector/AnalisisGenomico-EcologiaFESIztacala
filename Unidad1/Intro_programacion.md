@@ -16,7 +16,11 @@ Su principal objetivo es impulsar el software de libre distribución junto con s
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/TimelineOS.jpg? raw=true" alt="shell" width="800" height="700">
 </p>
 
+el 96.3% de los servidores del mundo usan linux, 1.9% windows y 1.8% FreeBSD.
 
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/UsoDeServidores.jpg? raw=true" alt="shell" width="800" height="700">
+</p>
 
 ## ¿Por qué usar Linux y no Windows?
 
