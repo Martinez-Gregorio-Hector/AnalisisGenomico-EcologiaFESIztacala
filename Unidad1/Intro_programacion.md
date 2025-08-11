@@ -47,7 +47,7 @@ Hardware: Conjunto de elementos físicos o materiales que constituyen una comput
 Software: Programas para realizar determinadas tareas. 
 
 <p align="center">
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg? raw=true" alt="shell" width="800" height="300">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg? raw=true" alt="shell" width="400" height="200">
 </p>
 
 ## Kernel
