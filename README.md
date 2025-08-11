@@ -23,15 +23,13 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ### Unidad 2. R
 ### Unidad 3. Pyhton
 ### Unidad 4. Análisis genómico
-### Unidad 5. Recursos adicionales
 
 4.1 Análisis de genoma completo
-
 4.2 Análisis de microbioma
-
 4.3 Análisis de RAD-seq
 
 ## Dinámica de clase y evaluación
+
 
 
 
