@@ -12,8 +12,8 @@ Linux es un SO diseñado por cientos de programadores de todo el planeta. El pri
 
 Su principal objetivo es impulsar el software de libre distribución junto con su código fuente para que pueda ser modificado por cualquier persona.
 
-<p align="center">
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Timeline_of_OS.jpg? raw=true" alt="shell" width="800" height="700">
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/TimelineOS.jpg? raw=true" alt="shell" width="800" height="700">
 </p>
 
 
