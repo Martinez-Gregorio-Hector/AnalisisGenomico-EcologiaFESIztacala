@@ -19,7 +19,7 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 ## Temario
 
-### Unidad 1. Linux
+### Unidad 1. Linux \\
 ### Unidad 2. R
 ### Unidad 3. Pyhton
 ### Unidad 4. Análisis genómico
