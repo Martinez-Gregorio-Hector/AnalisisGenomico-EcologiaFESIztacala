@@ -14,3 +14,10 @@
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Remota.png? raw=true" alt="shell" >
 </p>
 
+## Conexión remota al servidor
+
+### ssh lab13@132.248.216.138
+La contraseña y el acceso al directorio se te proporcionará en el curso
+
+## Uso de MobaXterm para establecer sesiones remotas a un servidor vía protocolo SSH
+
