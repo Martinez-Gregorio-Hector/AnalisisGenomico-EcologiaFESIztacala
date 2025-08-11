@@ -108,7 +108,7 @@ Descargas gratuitas de distribuciones desde:
 [MobaXterm](https://mobaxterm.mobatek.net/download.html ) proporciona una terminal para Windows con un servidor de ambiente gráfico X11, un cliente SSH para establecer sesiones remotas seguras con un servidor, diversas herramientas de red y más. 
 
 <p align="center">
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/MobaxTermn.png? raw=true" alt="shell" width="700" height="300">
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/MobaxTermn.png? raw=true" alt="shell" width="700" height="400">
 </p>
 
 
