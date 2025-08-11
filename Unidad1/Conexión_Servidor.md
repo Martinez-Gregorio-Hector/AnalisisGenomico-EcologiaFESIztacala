@@ -32,7 +32,8 @@ SSH es un protocolo que permite conectarse de forma segura a otro computador o s
 Una vez establecida la sesión remota al servidor, estarán trabajando en él!
 
 ● El panel mostrado a la izquierda les sirve para navegar el sistema remoto,pero lo haremos desde la línea de comandos que nos ofrece la terminal (área negra).
-● Pueden abrir más pestañas en la terminal. Estas serán sesiones locales (si no hacen ssh)
+
+● Pueden abrir más pestañas en la terminal. Estas serán sesiones locales (si no hacen ssh).
 
 
 <p align="center">  
