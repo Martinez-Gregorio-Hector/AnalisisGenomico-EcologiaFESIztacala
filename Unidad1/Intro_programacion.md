@@ -6,9 +6,9 @@ Aprender comandos básicos del sistema operativo Linux para aplicarlos en análi
 
 ## ¿Qué es linux?
 
-Un SO es un conjunto de órdenes y programas que controlan los procesos básicos de una computadora y permiten el funcionamiento de otros programas.
+Un sistema operativo (SO) es un conjunto de órdenes y programas que controlan los procesos básicos de una computadora y permiten el funcionamiento de otros programas.
 
-Linux es un sistema operativo (SO) diseñado por cientos de programadores de todo el planeta. El principal responsable del proyecto es Linus Tovalds.
+Linux es un SO diseñado por cientos de programadores de todo el planeta. El principal responsable del proyecto es Linus Tovalds.
 
 Su principal objetivo es impulsar el software de libre distribución junto con su código fuente para que pueda ser modificado por cualquier persona.
 
