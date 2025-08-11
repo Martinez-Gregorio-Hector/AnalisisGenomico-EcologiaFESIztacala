@@ -113,7 +113,7 @@ Descargas gratuitas de distribuciones desde:
 
 Instalar MobaXterm
 
-#### Download -> Home Edition ->Installer Edition.
+#### Download -> Home Edition -> Installer Edition.
 
 Dar click en el archivo zip descargado y seguir las instrucciones de instalación.
 
