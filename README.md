@@ -41,7 +41,14 @@ Presentación de un proyecto bioinformático 70%
 
 (Hacer un github, script, subir datos al repositorio, presentación-power point)
 
+## Presentación-power point
 
+- Marco Teórico
+- Objetivo
+- Material y métodos
+- Resultados
+- Conclusiones
+- Bibliografía
 
 
 
