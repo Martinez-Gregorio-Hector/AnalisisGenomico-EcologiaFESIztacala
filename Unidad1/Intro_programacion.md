@@ -50,9 +50,6 @@ Software: Programas para realizar determinadas tareas.
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Hardware_Software.jpg? raw=true" alt="shell" width="800" height="300">
 </p>
 
-
-
-
 ## Kernel
 
 El kernel es el componente de software encargado de controlar la computadora (hardware). 
@@ -80,14 +77,6 @@ Existen varios Shell disponibles (lista no exhaustiva):
 <p align="center">
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/shell.jpg?raw=true" alt="shell" width="300" height="300">
 </p>
-
-## Bash
-
-Las flechas ↑ y ↓ permiten navegar dentro del historial de los comandos. 
-
-La tecla ”tabulador” [TAB] permite auto-completar los nombres de los archivos y/o comandos. 
-
-Gestión de procesos en segundo plano (background).
 
 ## Sistema de archivos
 
