@@ -33,13 +33,9 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 ## Dinámica de clase y evaluación
 
-Asistencia 10%
+Trabajo en clase y tareas 30%
 
-Tareas 20%
-
-Presentación de un proyecto bioinformático 70%
-
-(Hacer un github, script, subir datos al repositorio, presentación-power point)
+Presentación de un proyecto bioinformático 70%. 35% será de un repositorio en github y 35% será la presentación en power point.
 
 ## Presentación-power point
 
