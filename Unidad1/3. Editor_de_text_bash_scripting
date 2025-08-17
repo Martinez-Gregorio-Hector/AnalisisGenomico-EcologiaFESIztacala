@@ -1,5 +1,0 @@
-# Editor de texto
-
-vim (vi improved) es un poderoso editor programable presente en todos los sistemas GNU/Linux. La principal característica tanto de Vim como de Vi consiste en que disponen de diferentes modos (normal, visual, insert, command-line, select, and ex) entre los que se alterna para realizar ciertas operaciones, lo que los diferencia de la mayoría de editores comunes, que tienen un solo modo (insert), en el que se introducen las órdenes mediante combinaciones de teclas (o interfaces gráficas).
-
-Vim Se controla por completo mediante el teclado desde un terminal, por lo que puede usarse sin problemas a través de conexiones remotas ya que no carga el sistema al no desplegar un entorno gráfico.
