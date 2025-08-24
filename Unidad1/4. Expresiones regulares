@@ -1,1 +1,9 @@
+# Expresiones regulares
 
+Una expresión regular es una plantilla de patrón que se define y que una utilidad de Linux utiliza para filtrar texto.
+
+Una utilidad de Linux (como el editor sed o el programa gawk) compara el patrón de la expresión regular con los datos a medida que estos fluyen hacia la utilidad. 
+Si los datos coinciden con el patrón, se aceptan para su procesamiento. Si no, se rechazan.
+
+El patrón de expresión regular utiliza caracteres comodín para representar uno o más caracteres en el flujo de datos. 
+En Linux, existen numerosos casos en los que se puede especificar un carácter comodín para representar datos desconocidos. 
