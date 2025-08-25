@@ -34,6 +34,7 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ## Bibliografia
 
 [Repo de AliciaMstt](https://github.com/AliciaMstt/BioinfinvRepro/tree/master)
+
 [Taller bioinfo Vinuesta](https://github.com/vinuesa/intro2linux)
 
 
