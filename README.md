@@ -24,27 +24,16 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ### Unidad 3. Pyhton
 ### Unidad 4. Análisis genómico
 
-
 4.1 Análisis de genoma completo
 
 4.2 Análisis de microbioma
 
 4.3 Análisis de RAD-seq
 
-## Dinámica de clase y evaluación
 
-Trabajo en clase y tareas 30%
+## Bibliografia
 
-Presentación de un proyecto bioinformático 70%. 35% será de un repositorio en github y 35% será la presentación en power point.
-
-## Presentación-power point
-
-- Marco Teórico
-- Objetivo
-- Material y métodos
-- Resultados
-- Conclusiones
-- Bibliografía
-
+[Repo de AliciaMstt](https://github.com/AliciaMstt/BioinfinvRepro/tree/master)
+[Taller bioinfo Vinuesta](https://github.com/vinuesa/intro2linux)
 
 
