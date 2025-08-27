@@ -89,7 +89,7 @@ ggplot(cats, aes(x = Sex)) +
 ```
 ¿Cómo podemos exportar el gráfico?
 
-Revisar esta [link](https://www.sthda.com/english/wiki/creating-and-saving-graphs-r-base-graphs)
+Revisar este [link](https://www.sthda.com/english/wiki/creating-and-saving-graphs-r-base-graphs)
 
 ### Tercera Actividad
 
@@ -105,3 +105,13 @@ g <- ggplot(cats, aes(x = Sex)) +
 g
 ```
 A continuación selecciona **g**, ve a **Addins** y da click en **ggplot Theme Assistant**. Explora los arreglos de las gráficas que puedes hacer.
+
+## Instalación de librerías
+
+Ya hemos visto que podemos instalar la librerías en la consola de R con el siguiente comando:
+
+```
+install.packages("ggplot2", dependencies=TRUE)
+
+```
+
