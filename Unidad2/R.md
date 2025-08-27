@@ -89,6 +89,8 @@ ggplot(cats, aes(x = Sex)) +
 ```
 ¿Cómo podemos exportar el gráfico?
 
+Revisar esta [link](https://www.sthda.com/english/wiki/creating-and-saving-graphs-r-base-graphs)
+
 ### Tercera Actividad
 
 * Ejecuta el siguiente código:
