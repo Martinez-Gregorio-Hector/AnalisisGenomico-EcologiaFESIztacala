@@ -187,7 +187,7 @@ Crea tres directorio en la carpeta que acabas de crear: **script**, **data**, y 
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/OrganizacionDirectorio.png? raw=true" alt="shell" >
 </p>
 
-# Nombre de archivos
+## Nombre de archivos
 
 Los nombres importan:
 
@@ -200,3 +200,22 @@ Los nombres importan:
 <p align="center">  
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/NombreDeLosArchivos.png? raw=true" alt="shell" >
 </p>
+
+## Amigable para computadoras (no sólo R)
+
+### Es fácil usar expresiones regulares y globbing
+
+* Evitar espacios, puntuación, acentos, caracteres especiales, uso de mayúsculas y minúsculas.
+
+### Es fácil operar sobre ellos
+
+* Usar delimitadores pensando que vamos a extraer componentes (guión bajo _)
+
+### globbing
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/globbing.png? raw=true" alt="shell" >
+</p>
+
+
+
