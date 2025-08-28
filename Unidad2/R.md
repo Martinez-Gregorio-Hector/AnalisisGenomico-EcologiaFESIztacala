@@ -56,7 +56,7 @@ En RStudio podemos generar todos los archivos enlístados en “New File”. El 
 
 ## Trabajando con environment
 
-### Primera actividad
+## Primera actividad
 
 * Crear un **R scripts**. 
 * En un script ejecuta el siguiente código:
@@ -75,7 +75,7 @@ table(cats$Sex)
 
 ¿Qué formas hay desde la interfaz gráfica para importar datos?
 
-### Segunda actividad
+## Segunda actividad
 
 * Ejecuta el siguiente código:
 
@@ -90,7 +90,8 @@ ggplot(cats, aes(x = Sex)) +
 ¿Cómo podemos exportar el gráfico?
 
 Revisar este [link](https://bookdown.org/ndphillips/YaRrr/saving-plots-to-a-file-with-pdf-jpeg-and-png.html)
-### Tercera Actividad
+
+## Tercera Actividad
 
 * Ejecuta el siguiente código:
 
@@ -122,7 +123,7 @@ install.packages(c("readr", "ggplot2", "tidyr"))
 
 ```
 
-#### Installing R Packages from GitHub
+## Installing R Packages from GitHub
 
 
 Algunos paquetes de R no están en CRAN, pero sí están disponibles en GitHub. Estos paquetes suelen estar en desarrollo o ofrecen funciones que aún no están disponibles en CRAN.
@@ -135,7 +136,7 @@ remotes::install_github("rstudio/shiny")
 
 ```
 
-### Instalación de paquetes R desde un archivo local
+## Instalación de paquetes R desde un archivo local
 
 Si has descargado un paquete a tu ordenador, puedes instalarlo así:
 
@@ -143,7 +144,8 @@ Si has descargado un paquete a tu ordenador, puedes instalarlo así:
 install.packages(/Users/YourName/Downloads/abc_2.1.zip", repos = NULL, type = "source")
 
 ```
-### Instalación de paquetes desde bioconductor
+
+## Instalación de paquetes desde bioconductor
 
 Puedes descargar una librería desde [bioconductor](https://www.bioconductor.org/)
 
@@ -187,7 +189,7 @@ Crea tres directorio en la carpeta que acabas de crear: **script**, **data**, y 
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/OrganizacionDirectorio.png? raw=true" alt="shell" >
 </p>
 
-## Nombre de archivos
+# Nombre de archivos
 
 Los nombres importan:
 
@@ -203,32 +205,59 @@ Los nombres importan:
 
 ## Amigable para computadoras (no sólo R)
 
-### Es fácil usar expresiones regulares y globbing
+## Es fácil usar expresiones regulares y globbing
 
 * Evitar espacios, puntuación, acentos, caracteres especiales, uso de mayúsculas y minúsculas.
 
-### Es fácil operar sobre ellos
+## Es fácil operar sobre ellos
 
 * Usar delimitadores pensando que vamos a extraer componentes (guión bajo _)
 
-### globbing
+## globbing
 
 <p align="center">  
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/globbing.png? raw=true" alt="shell" >
 </p>
 
-### Expresiones regulares
+## Expresiones regulares
 
 <p align="center">  
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ExpresionesRegulares.png? raw=true" alt="shell" >
 </p>
 
-### Es fácil operar sobre ellos 
+## Es fácil operar sobre ellos 
 
 <p align="center">  
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ExpresionesRegulares2.png? raw=true" alt="shell" >
 </p>
 
-### Amigables para humanos
+## Amigables para humanos
+
+Los nombres contienen información
+
+Los nombres dan contexto
+
+Mismo concepto que el slug en los URLs amigables al usuarion
+
+##  Se ordenan convenientemente
+
+Incluye un componente numérica
+
+Incluye ceros para tener una longitud constante, un orden ventajoso
+
+Usa el estándar ISO 8601 para fechas: aaaa-mm-dd
+
+## Guías
+
+* Evitar espacios, puntuación, acentos, caracteres especiales, uso de mayúsculas y minúsculas
+
+* Usar guiones bajos _ para separar metadatos que podré extraer después
+
+* Usar guiones altos para delimitar palabras y que sean fácil de leer
+
+* aaaa-mm-dd o algun componente numérico que facilite ordenar
+
+
+  
 
 
