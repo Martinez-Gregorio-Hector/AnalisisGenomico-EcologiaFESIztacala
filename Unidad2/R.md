@@ -183,3 +183,7 @@ En las opciones de RStudio Ve a **File > New project > New Directory > New Proje
 
 Crea tres directorio en la carpeta que acabas de crear: **script**, **data**, y **plot**
 
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad1/Figuras/Shell.png? raw=true" alt="shell" >
+</p>
+
