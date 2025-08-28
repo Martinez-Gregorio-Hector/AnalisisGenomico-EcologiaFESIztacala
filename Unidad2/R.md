@@ -187,3 +187,16 @@ Crea tres directorio en la carpeta que acabas de crear: **script**, **data**, y 
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/OrganizacionDirectorio.png? raw=true" alt="shell" >
 </p>
 
+# Nombre de archivos
+
+Los nombres importan:
+
+* Amigables para computadoras
+
+* Amigables para humanos
+
+* Se ordenan convenientemente
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/NombreDeLosArchivos.png? raw=true" alt="shell" >
+</p>
