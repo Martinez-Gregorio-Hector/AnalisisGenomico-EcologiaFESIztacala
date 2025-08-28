@@ -157,3 +157,29 @@ BiocManager::install("MutationalPatterns")
 
 ```
 
+# Flujos de trabajo con proyectos de RStudio
+
+Es un archivo especial de R, compatible con RStudio, que al ejecutarlo hará 3 cosas:
+
+* Abrirá una nueva sesión de RStudio.
+  
+* Establecerá la ubicación del proyecto como tu directorio de trabajo.
+  
+* Establecerá la ubicación del proyecto como la raíz de los archivos.
+
+## ¿Cómo generamos un proyecto de RStudio?
+
+Creando un proyecto en un directorio nuevo.
+
+En las opciones de RStudio Ve a **File > New project > New Directory > New Project**.
+
+* Asigna un nombre a tu proyecto, sin espacios y sin caracteres especiales.
+
+* Selecciona la ubicación donde crearás el nuevo directorio.
+
+* Selecciona la opción Open in New Session.
+  
+* Oprime Create Project.
+
+Crea tres directorio en la carpeta que acabas de crear: **script**, **data**, y **plot**
+
