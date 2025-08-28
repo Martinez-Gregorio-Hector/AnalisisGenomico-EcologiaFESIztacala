@@ -217,5 +217,18 @@ Los nombres importan:
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/globbing.png? raw=true" alt="shell" >
 </p>
 
+### Expresiones regulares
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ExpresionesRegulares.png? raw=true" alt="shell" >
+</p>
+
+### Es fácil operar sobre ellos 
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ExpresionesRegulares2.png? raw=true" alt="shell" >
+</p>
+
+### Amigables para humanos
 
 
