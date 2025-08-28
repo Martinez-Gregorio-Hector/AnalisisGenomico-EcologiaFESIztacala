@@ -89,7 +89,7 @@ ggplot(cats, aes(x = Sex)) +
 ```
 ¿Cómo podemos exportar el gráfico?
 
-Revisar este [link] (https://bookdown.org/ndphillips/YaRrr/saving-plots-to-a-file-with-pdf-jpeg-and-png.html)
+Revisar este [link](https://bookdown.org/ndphillips/YaRrr/saving-plots-to-a-file-with-pdf-jpeg-and-png.html)
 ### Tercera Actividad
 
 * Ejecuta el siguiente código:
