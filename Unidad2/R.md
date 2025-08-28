@@ -107,10 +107,53 @@ A continuación selecciona **g**, ve a **Addins** y da click en **ggplot Theme A
 
 ## Instalación de librerías
 
-Ya hemos visto que podemos instalar la librerías en la consola de R con el siguiente comando:
+Revisamos que la mayoría de los paquetes de R se almacenan en la Red Integral de Archivos de R (CRAN), el repositorio oficial de paquetes de R. Para instalar un paquete desde CRAN, utilizamos la función **install.packages()**:
 
 ```
-install.packages("ggplot2", dependencies=TRUE)
+install.packages("readr")
+```
+
+Este comando instala el paquete **readr**, que permite leer archivos CSV y otros formatos de archivo planos. Asegúrese de escribir el nombre del paquete entre comillas.
+
+También puede instalar varios paquetes a la vez pasando un vector de caracteres **(c())**:
+
+```
+install.packages(c("readr", "ggplot2", "tidyr"))
+
+```
+
+#### Installing R Packages from GitHub
+
+
+Algunos paquetes de R no están en CRAN, pero sí están disponibles en GitHub. Estos paquetes suelen estar en desarrollo o ofrecen funciones que aún no están disponibles en CRAN.
+
+Para instalar un paquete desde GitHub, use el paquete **{remotes}**:
+
+```
+install.packages("remotes")
+remotes::install_github("rstudio/shiny")
+
+```
+
+### Instalación de paquetes R desde un archivo local
+
+Si has descargado un paquete a tu ordenador, puedes instalarlo así:
+
+```
+install.packages(/Users/YourName/Downloads/abc_2.1.zip", repos = NULL, type = "source")
+
+```
+### Instalación de paquetes desde bioconductor
+
+Puedes descargar una librería desde [bioconductor](https://www.bioconductor.org/)
+
+Ejemplo de instalación de [MutationalPattern](https://www.bioconductor.org/packages/release/bioc/html/MutationalPatterns.html)
+
+```
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("MutationalPatterns")
 
 ```
 
