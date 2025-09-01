@@ -91,3 +91,18 @@ devtools::install_github("tidyverse/ggplot2")
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ParteDeLaGrafica.png? raw=true" alt="shell" >  
 </p>
 
+
+## Funciones principales en ggplot2
+
+
+* Hay dos funciones principales en ggplot2:
+
+* Una función que nos permite echarle un vistazo rápido a los datos
+
+  * **qplot()**
+
+* Una función más compleja que nos va a permitir explorar más a fondo los datos
+
+  * **ggplot()**
+
+
