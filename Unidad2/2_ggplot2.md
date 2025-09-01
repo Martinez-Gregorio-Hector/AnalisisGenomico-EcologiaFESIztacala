@@ -75,4 +75,19 @@ devtools::install_github("tidyverse/ggplot2")
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ReportorioGrafica4.png? raw=true" alt="shell" >  
 </p>
 
+
+## Elementos de un gráfico de ggplot
+
   
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/Elementos.png? raw=true" alt="shell" >  
+</p>
+
+
+## La gramática de la gráfica y ggplot2
+
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ParteDeLaGrafica.png? raw=true" alt="shell" >  
+</p>
+
