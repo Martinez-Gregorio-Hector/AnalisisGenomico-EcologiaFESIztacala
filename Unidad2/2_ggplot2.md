@@ -137,4 +137,23 @@ qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame,
 Trabajar con el script []()
 
 
+## Sintáxis ggplot2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[r-charts](https://r-charts.com/es/)
 
