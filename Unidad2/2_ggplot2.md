@@ -159,7 +159,22 @@ Trabajar con el script []()
 </p>
 
 
+## Datos
 
+* Los datos son los elementos más importantes de un gráfico
+
+* ggplot2 solo acepta un tipo de datos "data.frames"
+
+* Usaremos los datos de iris (de Fisher o Anderson) de las medidas en centímetros de las variables
+  * Longitud y ancho del sépalo
+ 
+  * Largo y ancho del pétalo
+ 
+  * Para 50 flores de cada una de las 3 especies de iris
+
+     * Iris setosa, versicolor y virginica
+   
+  
 
 
 
