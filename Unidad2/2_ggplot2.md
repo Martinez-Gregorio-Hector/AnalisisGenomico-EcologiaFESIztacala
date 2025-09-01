@@ -125,5 +125,12 @@ qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame,
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/qplot.png? raw=true" alt="shell" >  
 </p>
 
+## Datos: mtcars
+
+* Es un dataframe que viene con la librería de ggplot2
+
+* Los datos se extrajeron de la revista de la revista Motor Trend de EE. UU. de 1974
+
+* Comprenden el consumo de combustibles y 10 aspectos del diseño y el rendimiento del autómovil para 32 automóviles (modelo 1973-1974).
 
 
