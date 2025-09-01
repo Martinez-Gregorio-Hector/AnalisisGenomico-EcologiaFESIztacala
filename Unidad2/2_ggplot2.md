@@ -57,8 +57,8 @@ devtools::install_github("tidyverse/ggplot2")
 ## Repertorio de gráficas 
 
 <p align="center">  
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ReportorioGrafica1.png
-? raw=true" alt="shell" >
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ReportorioGrafica1.png? raw=true" alt="shell" >
+  
 </p>
 
 
