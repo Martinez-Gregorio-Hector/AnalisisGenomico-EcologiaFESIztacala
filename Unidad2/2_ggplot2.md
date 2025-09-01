@@ -100,14 +100,20 @@ devtools::install_github("tidyverse/ggplot2")
 * Una función que nos permite echarle un vistazo rápido a los datos
 
 ```
-  * **qplot()**
+qplot()
 ```
 
 * Una función más compleja que nos va a permitir explorar más a fondo los datos
 
 
 ```
-  * **ggplot()**
-
+ggplot()
 ```
 
+## Sintáxis qplot()
+
+Crea un gráfico completo con los datos, geom y mapeos. Proporciona muchos valores por defecto
+
+```
+qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame, geom = "point")
+```
