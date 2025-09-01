@@ -1,0 +1,491 @@
+---
+title: "2_ggplot2"
+output: html_document
+date: "2025-08-28"
+---
+
+Cargamos la librería de ggplot2
+
+```{r}
+library(ggplot2)
+```
+
+
+Usar datos de vectores numericos
+
+```{r}
+x <- 1:10
+y <- rnorm(10, 4.5, 0.1)
+```
+
+
+Explorar datos
+
+```{r}
+x
+y
+
+```
+
+
+Plot basico
+
+```{r}
+qplot(x,y)
+```
+
+
+Añadir una linea
+
+```{r}
+qplot(x, y, geom=c("point", "line"))
+```
+
+
+
+Usar datos de un data.frame, "mtcars" se incluye en la libreria ggplot2
+Explorar los datos
+
+
+```{r}
+?mtcars
+```
+
+
+```{r}
+head(mtcars)
+summary(mtcars)
+```
+
+Generar una gráfica con fines didácticos
+
+```{r}
+qplot(x=mpg, y=wt, data=mtcars)
+```
+
+
+
+Smoothing (agregar una línea suavizada con su error estandar)
+
+```{r}
+qplot(x=mpg, y=wt, data = mtcars, geom = c("point", "smooth"))
+```
+
+
+Ajuste lineal por grupo
+
+```{r}
+qplot(x=mpg, y=wt, data = mtcars, color = factor(cyl), geom=c("point", "smooth"))
+```
+
+
+
+Cambiar el color por una variable numerica continua
+
+```{r}
+qplot(x=mpg, y=wt, data = mtcars, colour = cyl)
+```
+
+
+
+Cambiar el color por grupos (factor)
+
+```{r}
+df <- mtcars
+df[,'cyl'] <- as.factor(df[,'cyl'])
+qplot(x=mpg, y=wt, data = df, colour = cyl)
+```
+
+
+Añadir lineas
+
+```{r}
+qplot(mpg, wt, data = df, colour = cyl, geom=c("point", "line"))
+```
+
+
+Adiccion de temas
+```{r}
+qplot(mpg, wt, data = df, colour = cyl, geom=c("point", "line")) + theme_bw()  
+```
+
+    
+Regresamos al github
+
+Usaremos el set de datos "iris" que se incluye en la librería de ggplot2. Explora los datos.
+
+```{r}
+head(iris)
+summary(iris)
+dim(iris)
+```
+
+
+Agregar datos a un objeto con la funcion ggplot()
+
+```{r}
+p <- ggplot(data=iris)
+p
+```
+
+
+Añadir aesthetics
+
+```{r}
+p <- p + aes(x= Petal.Length, y = Petal.Width, colour = Species)
+p
+```
+
+
+
+Otra forma de hacer el codigo anterior en una sola linea
+
+```{r}
+p <- ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species))
+p
+```
+
+
+Agregar capas (layers)
+
+```{r}
+p <- p + geom_point()
+p
+```
+
+
+
+Hazlo en una linea
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + geom_point()
+```
+
+
+Transformaciones estadisticas de los datos 
+
+```{r}
+p <- p + geom_smooth()
+p
+```
+
+
+
+En una sola linea
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+Facet grid (Cuadrícula de facetas)
+Vertical
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point() + 
+  geom_smooth() +  
+  facet_grid(~ Species)
+```
+
+
+Horizontal
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point() + 
+  geom_smooth() +  
+  facet_grid(Species ~.)
+```
+
+
+Quitar leyenda
+
+```{r}
+ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width, colour=Species)) + 
+  geom_point(show.legend = FALSE) +
+  geom_smooth(show.legend = FALSE) +  
+  facet_grid(Species~.)
+```
+
+
+Cambio de temas
+https://ggplot2.tidyverse.org/reference/ggtheme.html
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point(show.legend = FALSE) + 
+  facet_grid(Species~.) +
+  theme_bw()
+```
+
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point(show.legend = FALSE) + 
+  facet_grid(Species~.) +
+  theme_linedraw()
+```
+
+
+Cambiar otros elementos en el tema
+
+```{r}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point(show.legend = FALSE) + 
+  facet_grid(Species~.) +
+  theme_bw() +  
+  theme(panel.background = element_rect(fill = "skyblue"), panel.grid.minor = element_line(linetype = "dotted"))
+```
+
+
+Guardar imagenes
+
+En que directorio me encuentro
+
+getwd()
+
+Primera opcion
+
+PNG con una resolucion de 300 px
+
+```{r}
+png("../plot/dot_plot_iris_data.png", width=10 *300, height=8*300, res= 300)
+
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point(show.legend = FALSE) + 
+  facet_grid(Species~.) +
+  theme_linedraw()
+
+dev.off()
+```
+
+
+
+PDF (Imagen vectorizada)
+
+```{r}
+pdf("../plot/dot_plot_iris_data.pdf", width=10, height=8)
+
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width, colour = Species)) + 
+  geom_point(show.legend = FALSE) + 
+  facet_grid(Species~.) +
+  theme_linedraw()
+
+dev.off()
+```
+
+
+Segunda opcion con una funcion propia de ggplot2
+
+```{r}
+ggsave("../plot/dot_plot_iris_data.jpg", device= "jpg")
+```
+
+
+## Ejercicio 1
+
+Crear datos "cabbage_exp"
+
+cabbage_exp --> Es el recopilado de un experimento de un cultivo de "Col o repollo (cabbage)". Fueron 2 condiciones C39 y C52; y se cortaron las coles a los dias 16, 20 y 21; se pesaron 10 coles de la condicion y se obtuvo la desviacion estandar y el error estandar de la media del peso.
+
+cabbage_exp <- data.frame(Cultivar=c(rep("c39", 3), rep("c52", 3)), Date=rep(c("d16", "d20", "d21"),2), Weight=c(3.18, 2.80, 2.74, 2.26, 3.11, 1.47), sd= c(0.9566144, 0.2788867, 0.9834181, 0.4452215, 0.7908505, 0.2110819), n=rep(10,6), se=c(0.30250803, 0.08819171, 0.31098410, 0.14079141, 0.25008887, 0.06674995))
+
+Explorar datos
+```{r}
+
+```
+
+
+Gráfico de Bar plots basico, en el eje de las x=Date y y= Weight
+```{r}
+
+```
+
+
+Cambio de color de las barras, por ejemplo, azul
+```{r}
+
+```
+
+
+Cambio de tema
+```{r}
+
+```
+
+
+Grafico con barras apiladas coloreado por condicion, por ejemplo Cultivar
+
+```{r}
+
+```
+
+
+Usa otra paleta de colores, por ejemplo: Set1
+
+```{r}
+
+```
+
+
+Añadir texto a las gráficas de barras
+
+```{r}
+
+```
+
+
+Posicion "dodge"
+
+```{r}
+
+```
+
+
+Añadir barras de error
+
+```{r}
+
+```
+
+
+Scatter plots 
+
+Scatter plots basicos
+
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width)) +
+	geom_point()
+```
+
+
+Color por condicion
+
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, colour=Species)) +
+	geom_point()
+```
+
+
+Forma por condicion (shape)
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, shape=Species)) +
+	geom_point()
+```
+
+
+Forma y color por condicion
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, shape=Species, colour=Species)) +
+	geom_point() 
+```
+
+
+Cambiar los valores de forma
+https://www.sthda.com/english/wiki/ggplot2-point-shapes
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, shape=Species, colour=Species)) +
+	geom_point() +
+	scale_shape_manual(values=c(1,2,3))
+```
+
+
+Cambiar colores manuales
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, shape=Species, colour=Species)) +
+	geom_point() +
+	scale_shape_manual(values=c(1,2,3)) +
+	scale_colour_manual(values=c("deepskyblue", "seagreen2", "salmon")) +
+	theme_bw()
+```
+
+
+Cambiar la posicion del recuadro de la leyenda y las etiquetas de los ejes
+```{r}
+ggplot(data= iris, aes(x= Petal.Length, y= Petal.Width, shape=Species, colour=Species)) +
+  geom_point() +
+  scale_shape_manual(values=c(1,2,3)) +
+  scale_colour_manual(values=c("deepskyblue", "seagreen2", "salmon")) +
+  labs(title= "Taller ggplot RMB", y= "Petal Width (cm)", x= "Petal Length (cm)", fill= "") +
+  theme_bw() +
+  theme(legend.position="bottom")
+  
+```
+
+
+Graficos Interactivos de ggplot: esquisse       
+
+Instalar libreria: install.packages("esquisse")
+
+Cargar libreria
+```{r}
+library(esquisse)
+```
+
+
+Cargar datos
+```{r}
+esquisser(iris)
+```
+
+
+```{r}
+ggplot(iris) +
+  aes(x = Sepal.Length) +
+  geom_histogram(bins = 30L, fill = "#0c4c8a") +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(iris) +
+  aes(x = Sepal.Length, fill = Species) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue() +
+  theme_minimal()
+```
+
+
+Ejemplo: Boxplots
+```{r}
+ggplot(iris) +
+  aes(x = "", y = Sepal.Length, fill = Species) +
+  geom_boxplot() +
+  scale_fill_hue() +
+  theme_minimal()
+```
+
+
+Ejemplo: Densidad
+```{r}
+ggplot(iris) +
+  aes(x = Sepal.Length, fill = Species) +
+  geom_density(adjust = 1L) +
+  scale_fill_hue() +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(iris) +
+  aes(x = Sepal.Length, fill = Species) +
+  geom_density(adjust = 1L) +
+  scale_fill_viridis_d(option = "viridis") +
+  labs(x = "Densidad", title = "Gráfico de Densidad ", subtitle = "Taller ggplot RMB") +
+  theme_minimal()
+```
+
+
+
+```{r}
+ggplot(iris) +
+  aes(x = Sepal.Length, fill = Species) +
+  geom_density(adjust = 1L) +
+  scale_fill_viridis_d(option = "viridis") +
+  labs(x = "Densidad", title = "Gráfico de Densidad ", subtitle = "Taller ggplot RMB") +
+  theme_minimal()
+```
+
+
