@@ -117,3 +117,13 @@ Crea un gráfico completo con los datos, geom y mapeos. Proporciona muchos valor
 ```
 qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame, geom = "point")
 ```
+
+## ?plot
+
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/qplot.png? raw=true" alt="shell" >  
+</p>
+
+
+
