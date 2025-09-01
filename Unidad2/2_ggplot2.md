@@ -134,3 +134,7 @@ qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame,
 * Comprenden el consumo de combustibles y 10 aspectos del diseño y el rendimiento del autómovil para 32 automóviles (modelo 1973-1974).
 
 
+Trabajar con el script []()
+
+
+
