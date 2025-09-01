@@ -156,4 +156,7 @@ Trabajar con el script []()
 
 
 ## [r-charts](https://r-charts.com/es/)
+## [r-charts-colores](https://r-charts.com/es/colores/)
+## [r-graph](https://r-graph-gallery.com/)
+
 
