@@ -134,7 +134,7 @@ qplot(x = variable_X, y = variable_Y, color = variable_color, data = data.frame,
 * Comprenden el consumo de combustibles y 10 aspectos del diseño y el rendimiento del autómovil para 32 automóviles (modelo 1973-1974).
 
 
-Trabajar con el script []()
+Trabajar con el script[2_ggplot2](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/2_ggplot2.Rmd)
 
 
 ## Sintáxis ggplot2
@@ -174,15 +174,15 @@ Trabajar con el script []()
 
      * Iris setosa, versicolor y virginica
    
-  
+Trabajar con el script [2_ggplot2](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/2_ggplot2.Rmd)
+
+# Recursos
 
 
-
-
-
-
+#### [r-graphics](https://r-graphics.org/)
 #### [r-charts](https://r-charts.com/es/)
 #### [r-charts-colores](https://r-charts.com/es/colores/)
 #### [r-graph](https://r-graph-gallery.com/)
-
+#### [r-statistics](https://r-statistics.co/ggplot2-Tutorial-With-R.html)
+#### [positron](https://posit.co/products/ide/positron/)
 
