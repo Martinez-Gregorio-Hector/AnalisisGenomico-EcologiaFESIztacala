@@ -1,0 +1,839 @@
+---
+title: "TipoDeDatosObjetos"
+output:
+  html_document: default
+  pdf_document: default
+date: "2025-08-31"
+---
+
+En términos generales, todos los elementos que maneja R son objetos: un valor numérico es un objeto, una variable es un objeto, un vector es un objeto, una función es un objeto, una base de datos es un objeto, un gráfico es un objeto, ...
+
+## Variables
+
+Las variables son localidades de memoria a las que les asignamos un nombre para almacenar un valor que puede cambiar en el transcurso de un programa. 
+
+En R existen 3 maneras de hacer asignaciones de valores a las variables, utilizando los símbolos: **<-, ->, =**.
+
+**NOTA**: podemos agregar comentarios a nuestro código utilizando el caracter **#**. Es muy útil documentar el código, ya que lo hace más entendible
+
+```{r}
+# Asignación de variables
+A=3
+B <- 125 
+8 -> Y
+# Ver que se guardó en esas variables
+A
+B
+Y
+```
+
+
+Si una operación no es asignada a una variable, la operación se realizará y su resultado sólo se desplegará en la pantalla, pero no quedará almacenada.
+
+```{r}
+# Ejemplo donde no se asigna una variable
+3 + 5
+# Ejemplo de asignación de variable
+var1 = 4 + 6
+var1
+```
+
+Reglas para nombres de variables
+
+Al momento de definir el nombre de una variable debemos tomar en consideración las siguientes reglas:
+
+1. No deben comenzar con un número
+2. No deben contener espacios en blanco
+3. No deben contener símbolos especiales, excepto guión bajo ( _ ) o punto( . ).
+
+```{r}
+# Factor de cambio = 2
+# 1x <- 32.5
+# gen-reprimido <- "catB"
+```
+
+Algunos ejemplos de nombres válidos son:
+
+```{r}
+Factor_de_cambio = 2
+x1 <- 32.5
+gen_reprimido = "catB"
+condicion <- "WT"; curso2020 <-"IntroR"; x<-25
+```
+
+**NOTAS**. Cada comando puede estar en una línea o varios comandos por línea
+separados por “;”.
+Si al escribir un comando damos enter y el comando queda incompleto, entonces, de manera automática R colocará un símbolo de más (+) indicando que el comando se encuentra incompleto y permitiendo completarlo. Mientras no se complete el comando, seguirá apareciendo el símbolo +, cada vez que demos enter.
+
+## R es sensible a mayúsculas y minúsculas en los nombres de objetos
+
+Si bien es cierto que los nombres de variables pueden contener mayúsculas y minúsculas, es importante mencionar que, R distingue entre mayúsculas y minúsculas.
+
+```{r}
+genoma <-"ecoli"
+Genoma <-"ecoli"
+GENOMA <-"Klebsiella"
+GeNoMa <-"Geobacter"
+```
+
+Todas las definiciones anteriores son variables diferentes.
+
+## Tipos de datos
+
+En **R** (como en otros lenguajes de programación) hay diferentes tipos de datos; dentro de los más utilizados estan los **numéricos**, **lógicos** y **alfanuméricos** (o cadenas, strings en inglés).
+
+```{r}
+Edad <- 18            # Valor numérico
+LogFoldC <- 2.0075    # Valor numérico
+resultado <- TRUE     # Valor lógico o booleano
+geneName = "CRP"      # Valor alfanumérico (caracter)
+```
+
+**NOTA**: Es importante resaltar que los valores de tipo caracter deben ser delimitados por comillas simples o dobles, de lo contrario R considera que es el nombre de un objeto.
+
+## Valores perdidos
+
+Los valores perdidos constituyen una clase particular de dato, que se codifica siempre como NA (Not Available), independientemente de que la variable sea numérica o alfanumérica. Estos valores sirven, por ejemplo, cuando se registran datos y no es posible obtener la información de algunas variables para determinados casos. Con carácter general cualquier operación que involucre a un valor perdido dará como resultado también NA.
+Una segunda clase de valores “perdidos” en R corresponden a cálculos numéricos cuyos resultados son indefinidos o infinitos, como por ejemplo, log(−1) o $\frac{5}{0}$ . En el caso de los valores indefinidos, el resultado que devuelve R es NaN (Not a Number), y para los valores infinitos puede devolver Inf o -Inf. 
+
+```{r}
+-3/0    # Valor Infinito
+log(-4) # Valor indefinido
+```
+
+
+**Ejercicio 1**
+¿Cuáles de las siguientes definiciones son correctas?
+```{r}
+# varible.Uno <- 10
+# 25 <- "curso R"
+# Sqrt25 <- 5
+# nombre-25 <- 50
+# resultado <- 10/0
+```
+
+
+## Operadores aritméticos, relacionales y lógicos
+
+R, entre otras cosas puede realizar operaciones aritméticas básicas, así como operaciones relacionales y lógicas. En esta sección veremos los operadores aritméticos, relacionales y lógicos, así cómo las funciones matemáticas más usuales ya predefinidas en R listas para ser usadas.
+
+### Operadores aritméticos
+
+Los operadores aritméticos, más habituales en R se detallan en la siguiente tabla
+
+| Operador       | Símbolo| Ejemplos  |
+|----------------|:------:|----------:|
+| Suma           | +      | 9 + 25    |
+| Resta          | -      | 80 - 9.65 |
+| Multiplicación | *      | 12.2 * 15 |
+| División       | /      | 2 / 3     |
+| Exponenciación | ** o ^ | 3 ** 4    |
+| Módulo/Residuo | %%     | 2 %% 3    |
+
+
+```{r}
+# Suma
+9 + 25 
+# Resta
+80 - 9.65
+# Multiplicación
+12.2 * 15
+# División
+2 / 3
+# Exponenciación
+3 ** 4
+# Módulo
+2 %% 3
+```
+
+**Ejercicio 2**
+
+Predice el resultado, luego corrobóralo
+```{r}
+# 8 + 2
+# 13 / 4
+# 6+5*10-3
+# 6+5*(10-3)
+# 9(8-4)
+# A + b
+# A < -5; a <- 11; A + a 
+# c <- “prueba”
+# a + c
+```
+
+## Funciones matemáticas
+
+Además de las operaciones aritméticas básicas, R cuenta con una serie de funciones matemáticas, asi como diversas funciones útiles en estadística. Algunas de estas funciones se detallan en la Tabla 2.
+
+| Función        | Símbolo | Ejemplos     |
+|----------------|:-------:|-------------:|
+| Raíz cuadrada  | sqrt()  | sqrt(25)     |
+| Coseno         | cos()   | cos(0)       |
+| Logaritmo      | log()   | log(2)       |
+| Redondeo       | round() | round(3.85)  |
+| Valor absoluto | abs()   | abs(48 - 90) |
+
+```{r}
+# Raíz cuadrada
+sqrt(25) 
+# Coseno
+cos(0)
+# Logaritmo
+log(2)
+# Redondeo
+round(3.85)
+# Valor absoluto
+abs(48 - 90)
+```
+
+## Operadores racionales
+
+Los operadores relacionales se utilizan para comparar dos valores. El resultado de la comparación es de tipo lógico, es decir, toma un valor de Verdadero o Falso. Los operadores relacionales pueden aplicarse sobre todos los tipos de datos. En la Tabla 3 se muestran los operadores relacionales.
+
+| Operador          | Símbolo | Ejemplos  |
+|-------------------|:-------:|----------:|
+| Igual             | ==      | 5 == 3    |
+| Menor que         | <       | 5 < 3     |
+| Menor o igual que | <=      | 5 <= 3    |
+| Mayor que         | >       | 5 > 3     |
+| Mayor o igual que | >=      | 5 >= 3    |
+| Diferente         | 5 != 3  | 5 != 3    |
+
+```{r}
+# Igual
+5 == 3
+# Menor que 
+5 < 3
+# Menor o igual que
+5 <= 3
+# Mayor que
+5 > 3
+# Mayor o igual que
+5 >= 3
+# Diference
+5 != 3
+```
+
+## Operadores lógicos
+
+Los operadores lógicos son usados para evaluar relaciones lógicas, expresadas en términos de verdadero (TRUE) o falso (FALSE). Los operadores más utilizados se describen a continuación.
+
+| Operador  | Símbolo | Ejemplos             |
+|-----------|:-------:|---------------------:|
+| Y         | &       | (5 > 3) & (8 == 25)  |
+| O         | |       | (5 > 3) | (8 == 25)  |
+| Negación  | !       | !(5 > 3)             |
+
+```{r}
+# Y
+(5 > 3) & (8 == 25)
+# O 
+(5 > 3) | (8 == 25)
+# Negación
+!(5 > 3)
+```
+
+
+Las modalidades son: **( & )** cumplimiento en forma simultanea de las dos expresiones, para que el resultado sea verdadero, de lo contrario será falso, **( | )** cumplimiento alternativo, es decir por lo menos una de las expresiones debe ser verdadera, para que el resultado sea verdadero, de los contrario será falso. **( ! )** cumplimiento negado, si la expresión se evalua en verdadera al negarla el resultado será falso y viceversa.
+
+## Vectores
+
+Un vector en R, es esencialmente una lista ordenada de elementos, donde todos los elementos son del mismo tipo (enteros, caracteres, ...). La función más utilizada para generar un vector, es la función **c( )** (de combine)
+
+```{r}
+genoSiz<-c(3000000000,3000000000,135600000,97000000,12100000, 3500000,4639221,23000000,1674207132,560000000)
+genoSiz
+```
+
+R tiene aritmética vectorial, por lo que los vectores pueden aparecer en operaciones aritmáticas, afectando o modificando con la operación a cada uno de los elementos del vector.
+
+```{r}
+genoSiz * 10 # Multiplica cada uno de los elementos del vector por 10
+```
+
+Hasta ahora sólo hemos visto manejo de valores numéricos, sin embargo, podemos tener otros tipos de valores. Por ejemplo, valores de tipo caracter, los cuales deben encerrarse entre comillas, con la finalidad de diferenciarlos de los nombres de objetos.
+
+
+```{r}
+org<-c("Homo Sapiens","Raton","Mosca de Fruta","Lombriz","Levadura", "Geobacter","E.coli K12","Pino","Pez Zebra","Rosa")
+org
+```
+
+## La función names()
+
+Es posible asignarle etiquetas (nombres) a un vector por medio de la función **names()**. Por ejemplo, al vector de valores numéricos que representa los tamaños de los genomas, le podemos poner como etiquetas los valores de vector org.
+
+```{r}
+genoSiz
+org
+names(genoSiz)<-org
+genoSiz
+```
+
+## Manejo de los elementos del vector
+
+Además de las funciones que operan sobre todos los elementos del vector, R permite manipular sólo una parte del vector. Para extraer partes de un vector, usamos corchetes cuadrados. 
+
+```{r}
+# Primer elemento del vector
+genoSiz[1]
+# Quinto elemento del vector
+genoSiz[5]
+```
+Para modificar el nombre de uno de los elementos:
+
+```{r}
+# Modificando el nombre del elemento 1 del vector
+names(genoSiz)[1]<-"Humano"
+genoSiz
+```
+
+Para obtener un conjunto específico de elementos del vector, utilizamos dentro de los corchetes la función c( ) para indicar los índices de los elementos que queremos extraer. Por ejemplo:
+
+```{r}
+# Obtenemos sólo los elementos 1, 5 y 9 del vector
+genoSiz[c(1,5,9)] 
+```
+
+Para obtener un subconjunto de elementos consecutivos del vector, utilizamos dentro de los paréntesis el operador dos puntos (:), por ejemplo:
+
+```{r}
+# Obtenemos los elementos del 3 al 8
+genoSiz[3:8]
+```
+
+Finalmente, para excluir algunos elementos del vector, utilizamos el signo menos( - ), por ejemplo:
+```{r}
+# Muestra todos los elementos excepto el 1
+genoSiz[(-1)]
+# Muestra los elementos del vector excepto el 2, 4 y 7
+genoSiz[-c(2,4,7)]
+# Muestra los elementos del vector excepto el 2, 4 y 5
+genoSiz[-c(3:5)]
+```
+
+Algunas funciones que se pueden aplicar a los vectores son:
+```{r}
+# Calcular la media
+mean(genoSiz)
+# El valor máximo del vector
+max(genoSiz)
+# El valor mímino del vector
+min(genoSiz)
+# La suma de los elementos del vector
+sum(genoSiz)
+# El tamaño del vector
+length(genoSiz)
+```
+
+**Ejercicio 3**
+
+1. Genere un vector con las mediciones de crecimiento en 12 hrs (en número de colonias), de por lo menos 5 bacterias diferentes.
+a. Agregue los nombres cada bacteria usando la función names. 
+b. Calcule el promedio, el valor mínimo y máximo de crecimiento de las bacterias
+c. Agregue dos bacterias más, junto con sus datos de crecimiento.
+
+## Matrices
+
+Las matrices son objetos de dos dimensiones que contienen renglones y columnas. Al igual que en el caso de los vectores en las matrices sólo podemos almacenar datos del mismo tipo (por ejemplo numéricos o caracteres). La función más utilizada para definir una matriz es **matrix**. 
+
+```{r}
+datos<-c(2,1,2,1.5,2.2,1,7,5.5,6.8,6,5.9,6.3,17,15,20,14,16,19)
+datos
+```
+
+Con los valores del objeto datos podemos generar una matriz de 6 renglones y 3 columnas con las siguientes
+instrucciones:
+
+```{r}
+mouseWt4W <- matrix(datos, 6, 3) 
+mouseWt4W
+```
+
+Como podemos observar al comando **matrix**, es necesario decirle cuántos filas y cuántas columnas tendrá la matriz. Además, por default la matriz se construye colocando los datos en columnas.
+Si queremos que los datos se vayan colocando por renglones, tenemos que agregar el parámetro **byrow = TRUE**
+
+```{r}
+matrix(datos, 6, 3, byrow = TRUE)
+```
+
+**NOTA:** Si el número de elementos es menor que las dimensiones de la matriz, repetirá los elementos desde el principio para completar los que falten.
+
+## Las funciones rownames y colnames
+
+Como en el caso de los vectores, en las matrices podemos etiquetar los valores de las columnas y los renglones, para ello utilizamos las funciones **rownames()** y **colnames()**. Por ejemplo, supongamos que nuestros renglones corresponden a diferentes ratones (mouse) y las columnas a los pesos de ratones en diferentes semanas (week)
+
+```{r}
+rownames(mouseWt4W)<-c("mouse1","mouse2","mouse3","mouse4","mouse5","mouse6") 
+colnames(mouseWt4W)<-c("week1","week3","week5")
+mouseWt4W
+```
+
+## Manejo de matrices
+
+La sintaxis para acceder a los elementos de una matriz es: **nombre_matriz[filas,columnas]**, donde filas y columnas corresponden a los índices de los renglones y columnas de los elementos que queremos consultar.
+
+```{r}
+# Para obtener el primer elemento de la matriz
+mouseWt4W [1,1] 
+# Para obtener el elemento de la fila 5 y columna 3
+mouseWt4W [5,3]  
+```
+
+Se puede obtener también un subconjunto de elementos de la matriz usando **c( )** para combinar los índices de los renglones y columnas de los elementos que vamos a obtener.
+
+```{r}
+# Para obtener elementos no consecutivos
+# Obtener todos los renglones de las columnas 1 y 3
+mouseWt4W [ ,c(1,3)]
+```
+
+```{r}
+# Para ontener elementos consecutivos
+# Obtener los renglones de 2 a 5, en todas las columnas
+mouseWt4W [2:5, ] 
+```
+Como podemos observar en los ejemplos anteriores, cuando los índices de los renglos o las columnas, no se especifican, se muestran todos los renglones o todas las columnas. Si dejamos vacíos tanto el índice de los renglones como el de las columnas obtendremos todos los elementos de la matriz.
+
+```{r}
+# No se indican los índices ni de los renglones, ni de las columnas
+mouseWt4W [ , ]
+```
+
+Finalmente, para excluir algunos elementos de la matriz, utilizamos el signo menos( - ), como en el caso de los vectores. Por ejemplo:
+
+```{r}
+# Muestra la matriz, sin los renglones 1 y 3
+mouseWt4W [-c(1,3), ] 
+```
+## Funciones rbind y cbind
+
+Las funciones **rbind** y **cbind**, permiten agregar a la matriz filas o columnas, respectivamente. 
+
+```{r}
+week7<-c(20,23,23,20,19,21) 
+mouseWt4W <- cbind(mouseWt4W, week7) 
+mouseWt4W
+```
+
+## Otras funciones aplicables a matrices
+
+Podemos utilizar algunas de las funciones que vimos para vectores (mean, max, entre otras), además de otras que no se pueden aplicar a vectores como es el caso de dim, nrow y ncol
+
+```{r}
+# Obtiene el número de renglones y columnas de la matriz
+dim(mouseWt4W)
+# Obtiene el número de filas
+nrow(mouseWt4W)
+# Obtiene el número de columnas
+ncol(mouseWt4W)
+# Promedio de los elementos de la matriz
+mean(mouseWt4W)
+# Suma sobre cada una de las filas
+rowSums(mouseWt4W)
+# Suma sobre cada una de las columnas
+colSums(mouseWt4W)
+```
+
+
+```{r}
+# Resumen estadístico por columna
+summary(mouseWt4W)
+```
+
+**Ejercicios 4**
+
+1. Genere una matriz de 3 renglones y 5 columnas, con los siguientes datos: 1,2,3,2,4,6,3,6,9,4,8,16,5,10,15
+2. Ponga como nombres de fila: E.Coli,Clostridium,Mycobacterium
+3. Ponga como nombres de columnas: Colonias1,Colonias2, . . . , Colonias5
+4. Obtenga la información estadística de la media, primer cuartil, máximo y mínimo.
+5. Agregar 1 renglon con datos para la bacteria Salmonella.
+
+## Factores
+
+Los factores son variables categóricas que pueden ser numéricas o de tipo carácter. Un ejemplo clásico de una variable categórica es el “genero”, ya que sólo toma dos valores: “femenino” o “masculino”. Para crear un objeto de tipo factor se utiliza la función **factor( )** sobre un vector. 
+
+```{r}
+Tejidos <- factor(c("higado","riñon","higado","riñon","higado")) 
+Tejidos
+```
+
+
+```{r}
+Experimentos <- factor(c("WT","Control","Control","WT","WT","Control")) 
+Experimentos
+```
+
+
+Como podemos observar levels contiene las diferentes categorías del factor. A cada categoría R le asigna un número identificador por orden alfabético. Para ver las categorías de un objeto tipo factor se utiliza el comando levels().
+
+```{r}
+levels(Tejidos)
+```
+
+La función summary en factores. En el caso de los factores, la función summary cuantifica el número de elementos por categoría.
+
+```{r}
+summary(Tejidos)
+```
+
+## Dataframes
+
+Los dataframe son objetos de dos dimensiones que contienen renglones y columnas. Este tipo de objeto es muy similar a las matrices, pero su princial diferencia es que los dataframe pueden almacenar diferentes tipos de datos. En general un dataframe se crea al hacer uso de la función read.table(), que se encarga de leer un archivo. Sin embargo, también se puede generar con la función data.frame().
+
+```{r}
+comGenSiz<-data.frame(
+  org=c("Humano","Raton","Mosca de Fruta","Lombriz", "Levadura"),
+  genSizBP=c(3000000000,3000000000,135600000,97000000,12100000),
+  estGenCont=c(30000,30000,13061,19099,6034))
+
+comGenSiz
+
+```
+
+Como podemos observar, la primera columna del dataframe contiene valores numéricos consecutivos, estos valores representan los nombres de cada uno de las filas (los cuales deben ser valores únicos, es decir, no puede haber nombres repetidos). Si al momento de generar el dataframe, los nombres de los renglones no son proporcionados, por default se asignaran valores numéricos. Para poner nombres al momento de generar el dataframe, agregamos el parámetro row.names.
+
+```{r}
+comGenSiz<-data.frame(
+  org=c("Humano","Raton","Mosca de Fruta","Lombriz", "Levadura"),
+  genSizBP=c(3000000000,3000000000,135600000,97000000,12100000),
+  estGenCont=c(30000,30000,13061,19099,6034),
+  row.names=c("genoma1","genoma2","genoma3","genoma4","genoma5"))
+  
+comGenSiz
+```
+
+## Manejo de dataframes
+
+La sintaxis para acceder a los elementos de una dataframe es similar a la de una matriz: **nombre_dataframe[renglones,columnas]**
+
+```{r}
+# Obtiene el elemento de la columna 1 y renglón 1
+comGenSiz[1,1] 
+
+```
+
+
+```{r}
+# Obtiene el elemento de la fila 5 columna 1
+comGenSiz[5,1] 
+
+```
+
+
+```{r}
+# Obteniendo elementos no consecutivos
+comGenSiz[,c(1,3)]
+```
+
+```{r}
+# Obteniendo elementos consecutivos
+comGenSiz[2:5,]
+```
+
+
+```{r}
+# Excluyendo elementos
+comGenSiz[-c(1,3),] 
+```
+
+Las columnas del dataframe pueden ser accedidas de manera individual de tres formas diferentes.
+
+1) Utilizando el símbolo $ y el nombre de la columna que queremos extraer, si nosotros no le asignamos de manera explicita nombres a las columnas, R les asigna V1, V2, . . . , de manera automática. Pero para estar seguros cómo se llaman las columnas utilizamos el comando names(nombre_del_dataframe) y no aparecerá el nombre de cada columna. Consultemos los nombres de nuestro dataframe comGenSiz.
+
+```{r}
+names(comGenSiz)
+```
+
+
+```{r}
+# Extrayendo la columna organism, por medio del operador $
+comGenSiz$org 
+```
+
+
+2) Poniendo entre corchetes el nombre de la columna que queremos consultar, el nombre de la columna debe ir entre comillas.
+
+```{r}
+comGenSiz ["org"]
+```
+
+3) Poniendo entre cochetes el número o índice de la columna que queremos consultar.
+
+```{r}
+comGenSiz [,1]
+```
+
+
+## Algunas funciones aplicables a dataframe
+
+Podemos utilizar algunas de las funciones que vimos para vectores y/o matrices (mean, max, dim, nrow y ncol, names, entre otras).
+
+```{r}
+# Calculando el máximo de los elementos
+
+# max(comGenSiz) 
+```
+
+
+```{r}
+# Suma de los elementos por renglon
+
+# rowSums(comGenSiz) 
+```
+
+
+```{r}
+# Suma de los elementos por columna
+
+# colSums(comGenSiz) 
+```
+
+
+```{r}
+# Obtiene el número de renglones y columnas de la matriz
+dim(comGenSiz) 
+```
+
+
+```{r}
+str(comGenSiz)
+```
+
+```{r}
+# Muestra los primeros 5 renglones
+head(comGenSiz) 
+```
+
+
+```{r}
+# Muestra los últimos 5 renglones
+tail(comGenSiz) 
+```
+
+Como podemos observar al querer realizar operaciones numéricas (max, min, rowSums, colSums) sobre todo el dataframe nos marca un error, debido a que una de sus columnas no es de tipo numérico, por lo tanto podemos seleccionar sólo las columnas numéricas donde se aplicacrán dichos operadores.
+
+```{r}
+ # Calculando el máximo de las columnas 2 y 3
+max(comGenSiz[,2:3])
+```
+
+
+```{r}
+# Suma de los elementos por renglon
+rowSums(comGenSiz[,2:3]) 
+```
+
+
+```{r}
+# Suma de los elementos por columna
+colSums(comGenSiz[,2:3]) 
+```
+
+
+**Ejercicios 5**
+
+1. Con los siguientes vectores, genere un dataframe, llamado planetas.
+```{r}
+name = c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune") 
+
+type = c("Terrestrial planet", "Terrestrial planet","Terrestrial planet",
+"Terrestrial planet", "Gas giant","Gas giant", "Gas giant", "Gas giant")
+
+diameter = c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007,3.883)
+
+rotation = c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67) 
+
+rings = c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE,TRUE)
+```
+
+2. Obenga el promedio de los valores de las columnas diameter y rotation
+3. Aplique la función summary al objeto planetas y vea que sucede.
+
+## Lista
+
+Una lista es una colección ordenada de objetos, conocidos como componentes.
+
+¿Cuáles son sus características?
+
+* Los componentes pueden ser de diferente tamaño y clase.
+* Las listas pueden contener vectores, matrices, cadenas de caracteres, data frames, funciones, etc.
+
+Para crear una lista usaremos la función **list()**.
+
+```{r}
+frutas <- list(fruta = "manzana", unidades = 5,
+               caracteristicas = c("roja","pequeña","dulce") )
+frutas
+```
+
+Observemos que sus componentes se encuentran numerados, de manera que podemos referirnos a ellos por su posición en la lista.
+
+¿Cómo extraemos el elemento "fruta"?
+
+```{r}
+frutas[1]
+```
+
+
+```{r}
+frutas[[1]]
+```
+
+
+¿Cuál es la diferencia entre estas dos opciones?. Vamos a revisar de qué clase es cada una de ellas
+
+```{r}
+class(frutas[1])
+class(frutas[[1]])
+```
+
+
+Ahora, vamos a explorar los elementos del componente "caracteristicas".
+
+Si el componente tiene múltiples elementos, usamos una segunda numeración para referirnos al elemento deseado.
+
+Para extraer la primera característica de la manzana (el color):
+
+```{r}
+frutas[[3]][1]
+```
+
+
+Otra forma de extraer los componentes de una lista es usando el símbolo $ y el nombre del componente que deseamos extraer.
+
+```{r}
+frutas$unidades
+```
+
+
+```{r}
+frutas$caracteristicas
+```
+
+
+Esto es muy útil porque puede ser más fácil recordar el nombre del componente que su posición en la lista.
+
+Ahora, ¿cómo extraemos los elementos del componente característica usando $?
+
+```{r}
+frutas$caracteristicas[1]
+```
+
+
+## Ejercicio 6
+
+```{r}
+# 1. Generemos una nueva lista:
+jugadores <- list(nombre = c("Julie", "Juan", "Sofia"),
+                   edad = c(22, 29, 34),
+                  estatura = c(1.62, 1.75, 1.65))
+
+# 2. ¿Cómo podemos conocer la estatura de Sofía?
+# 3. ¿Cómo podemos obtener la edad de Julie y Juan al mismo tiempo?
+```
+
+
+## Lectura de archivos
+
+Para lectura y escritura de archivos R utiliza por default el directorio de trabajo, a menos que le digamos de manera explicita la dirección donde se leerán o escribirán los archivos. Recordemos que si queremos saber en que directorio estamos, utilizamos el comando **getwd** y para cambiar de directorio, lo haremos con el comando **setwd**.
+
+Con R podemos leer archivos de texto (ASCII) utilizando las siguientes funciones: 
+
+* read.table (que tiene algunas variantes)
+* scan
+
+Se pueden leer otro tipo de formatos como son Excel, SPSS, entre otros, pero las funciones que se necesitan para la lectura de estos archivos no vienen dentro del paquete básico de R, se requiere la instalación de otros Paquetes de R.
+
+## La función read.table
+
+Por medio de la función read.table leemos archivos en formato tabular y se crea un dataframe para su almacenamiento. Los argumentos de la función y sus valores por default los podemos ver Consultando la ayuda.
+
+```{r}
+?read.table
+```
+
+para leer este archivo utilizaríamos la siguiente instrucción:
+
+```{r}
+# countTable<-read.table("/Data/Modulo08/conteos.txt")
+```
+
+Automáticamente se crea un dataframe (Dataframes), cuyas columnas son etiquetadas por default como V1, V2 . . . Como es un archivo con muchos renglones usaremos el comando head (Algunas funciones aplicables a dataframe) para visualizar los primeros renglones.
+
+```{r}
+# head(countTable)
+```
+
+
+## Parámetros más comunes de read.table
+
+
+Aunque nuestro archivo contiene nombres de columnas y nombres de renglones, la función read.table no los identifica por default, para ello necesitamos definir algunos parámetros, los cuales podemos ver en la ayuda. En general los parámetros más utilizados son:
+
+```{r}
+# Para indicar que el primer renglón del archivo contienen los nombres de las columnas
+# header = T       
+
+# Para indicar qué tipo de separador tenemos, por lo general es tabulador
+# sep              
+
+# Para indicar en qué columna se encuentran los nombres de los renglones
+# row.names     
+
+# Para indicar el símbolo que se usará para poner comentarios.
+# comment.char.     
+
+# Para indicar si los valores de tipo caracter son considerados como factores o no.
+# stringsAsFactors  
+```
+
+
+
+Volvamos a leer el archivo conteos.txt, considerando que el primer renglón corresponde a los nombres de las columnas y la primera columna corresponde a los nombres de renglones. Y verifiquemos que los nombres de las columnas y renglones son correctos.
+
+```{r}
+# Leyendo el archivo
+# countTable<-read.table("/Data/Modulo08/conteos.txt", sep="\t",header = T,row.names = 1)
+```
+
+## Variantes de read.table
+
+read.csv(file, header = TRUE, sep = ",", quote="\"", dec=".”, fill = TRUE, ...)
+read.csv2(file, header = TRUE, sep = ";", quote="\"", dec=",”,fill = TRUE, ...)
+read.delim(file, header = TRUE, sep = "\t", quote="\"", dec=".”, fill = TRUE, ...)
+read.delim2(file, header = TRUE, sep = "\t", quote="\"", dec=",”,fill = TRUE, ...)
+
+
+## Escritura de write.table
+
+La función write.table nos permite guardar los datos de una dataframe en un archivo, con un formato de tabla. write.table tiene una serie de argumentos para indicar, cómo queremos que se almacenen los datos. Por ejemplo, si se incluyen los nombres de renglón, de columna, el tipo de separador, entre otros. Los argumentos de la función y sus valores por default los podemos consultar en la ayuda.
+
+
+```{r}
+?write.table
+```
+
+
+Usage:
+write.table(x, file = "", append = FALSE,quote = TRUE, sep = " ",* eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "")
+
+Los parámetros más utilizados son los que se encuentran en letras itálicas:
+
+sep:        Para indicar el tipo de separador
+row.names:  Para indicar si la tabla se guarda con nombres de renglones o no
+col.names:  Para indicar se la tabla se guarda con nombres de columnas o no
+
+Por ejemplo, utilizando el objeto countTable, que leímos anteriormente, eliminaremos los renglones de ceros y guardaremos los resultados en un archivo llamado conteosSinCeros.txt, utilizando la función write.table.
+
+Primero verifiquemos cuántos renglones tiene el objeto countTable, posteriormente eliminemos los renglones con ceros y veamos con cuántos renglones nos quedamos. Finalmente, guardemos los resultados en el archivo.
+
+
+```{r}
+# write.table(countTableSinCeros,"conteosSinCeros.txt",quote=FALSE,sep="\t")
+```
+
+
+## La función write
+
+La función write, se utiliza generalmente para almacenar objetos de tipo vector o matriz. Para efectos de este curso, no haremos uso de esta función, dado que trabajaremos en general con tablas y por lo tanto utilizaremos write.table. Sin embargo, se puede consultar la descripción de write en la ayuda.
