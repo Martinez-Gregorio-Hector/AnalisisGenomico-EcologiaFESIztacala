@@ -99,10 +99,15 @@ devtools::install_github("tidyverse/ggplot2")
 
 * Una función que nos permite echarle un vistazo rápido a los datos
 
+```
   * **qplot()**
+```
 
 * Una función más compleja que nos va a permitir explorar más a fondo los datos
 
+
+```
   * **ggplot()**
 
+```
 
