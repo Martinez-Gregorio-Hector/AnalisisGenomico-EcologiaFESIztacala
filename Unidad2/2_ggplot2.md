@@ -139,6 +139,24 @@ Trabajar con el script []()
 
 ## Sintáxis ggplot2
 
+* Crea un gráfico al que se le añaderan capas. Sin valores por defecto, pero que proporcionan más control
+
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ggplot2_structure.png? raw=true" alt="shell" >  
+</p>
+
+
+
+## Ver la estructura de ggplot2
+
+```
+?ggplot
+```
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad2/FigurasUnidad2/ggplo2help.png? raw=true" alt="shell" >  
+</p>
 
 
 
@@ -148,15 +166,8 @@ Trabajar con el script []()
 
 
 
-
-
-
-
-
-
-
-## [r-charts](https://r-charts.com/es/)
-## [r-charts-colores](https://r-charts.com/es/colores/)
-## [r-graph](https://r-graph-gallery.com/)
+#### [r-charts](https://r-charts.com/es/)
+#### [r-charts-colores](https://r-charts.com/es/colores/)
+#### [r-graph](https://r-graph-gallery.com/)
 
 
