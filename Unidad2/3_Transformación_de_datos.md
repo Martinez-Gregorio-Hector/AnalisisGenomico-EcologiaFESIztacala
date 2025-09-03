@@ -18,8 +18,7 @@ Para explorar los verbos básicos de manipulación de datos de dplyr, utilizarem
 
 
 ```
-library(nycflights13)
-library(tidyverse)
+flights
 ```
 
 Quizás notes que este marco de datos se imprime de forma ligeramente diferente a otros que hayas usado anteriormente: solo muestra las primeras filas y todas las columnas que caben en una pantalla. (Para ver el conjunto de datos completo, puedes ejecutar View(flights), que abrirá el conjunto de datos en el visor de RStudio). Se imprime de forma diferente porque es un tibble. Los tibbles son dataframes, pero ligeramente modificados para funcionar mejor en tidyverse. 
@@ -73,7 +72,50 @@ Juntas, estas propiedades facilitan la conexión de varios pasos simples para ob
 
 filter() permite crear subconjuntos de observaciones según sus valores. El primer argumento es la dataframe. El segundo argumento y los siguientes son las expresiones que filtran el marco de datos. Por ejemplo, podemos seleccionar todos los vuelos del 1 de enero con:
 
+```
+filter(flights, month == 1, day == 1)
+```
+
+Cuando ejecuta esa línea de código, dplyr ejecuta la operación de filtrado y devuelve un nuevo marco de datos. Las funciones de dplyr nunca modifican sus entradas, por lo que si desea guardar el resultado, deberá usar el operador de asignación, <-:
+
+```
+jan1 <- filter(flights, month == 1, day == 1)
+```
+
+R imprime los resultados o los guarda en una variable. Si desea hacer ambas cosas, puede encerrar la asignación entre paréntesis:
+
+```
+(dec25 <- filter(flights, month == 12, day == 25))
+```
+
+## Comparaciones
+
+Para usar el filtrado eficazmente, es necesario saber cómo seleccionar las observaciones deseadas mediante los operadores de comparación. R ofrece los operadores estándar: >, >=, <, <=, != (distinto) y == (igual).
 
 
+## Operadores lógicos
 
+Los argumentos múltiples de **filter()** se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en la salida. Para otros tipos de combinaciones, deberá usar operadores booleanos: & es "y", | es "o" y ! es "no". 
+
+El siguiente código busca todos los vuelos que salieron en noviembre o diciembre:
+
+
+```
+filter(flights, month == 11 | month == 12)
+```
+
+El orden de las operaciones no funciona como en español. No se puede escribir filter(flights, month == (11 | 12)), que literalmente se podría traducir como "busca todos los vuelos que salieron en noviembre o diciembre". En su lugar, busca todos los meses que sumen 11 | 12, una expresión que se evalúa como VERDADERO. En un contexto numérico (como aquí), VERDADERO se convierte en uno, por lo que se buscan todos los vuelos de enero, no de noviembre ni de diciembre. ¡Esto es bastante confuso!
+
+Una abreviatura útil para este problema es x %in% y. Esto seleccionará todas las filas donde x sea uno de los valores de y. Podríamos usarla para reescribir el código anterior:
+
+```
+nov_dec <- filter(flights, month %in% c(11, 12))
+```
+
+A veces se puede simplificar la subdivisión compleja recordando la ley de De Morgan: !(x e y) es igual a !x | !y, y !(x | y) es igual a !x e !y. Por ejemplo, si se desea encontrar vuelos con un retraso (de llegada o salida) de más de dos horas, se puede usar uno de los dos filtros siguientes:
+
+```
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+```
 
