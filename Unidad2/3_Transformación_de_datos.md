@@ -176,3 +176,6 @@ rename(flights, tail_num = tailnum)
 
 Otra opción es usar **select()** junto con el asistente **everything()**. Esto es útil si tiene varias variables que desea mover al inicio del marco de datos.
 
+```
+select(flights, time_hour, air_time, everything())
+```
