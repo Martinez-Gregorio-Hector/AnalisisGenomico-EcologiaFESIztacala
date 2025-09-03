@@ -179,3 +179,67 @@ Otra opción es usar **select()** junto con el asistente **everything()**. Esto 
 ```
 select(flights, time_hour, air_time, everything())
 ```
+## Ejercicio
+
+1. Piensa en todas las maneras posibles de seleccionar dep_time, dep_delay, arr_time y arr_delay de los vuelos.
+
+2. ¿Qué ocurre si se incluye el nombre de una variable varias veces en una llamada a select()?
+
+3. ¿Qué hace la función any_of()? ¿Por qué podría ser útil junto con este vector?
+
+```
+rename(flights, tail_num = tailnum)
+```
+
+## Añadir nuevas variables con mutate()
+
+Además de seleccionar conjuntos de columnas existentes, suele ser útil añadir nuevas columnas que sean funciones de columnas existentes. Esa es la función de mutate().
+
+**mutate()** siempre añade nuevas columnas al final del conjunto de datos, así que comenzaremos creando un conjunto de datos más reducido para poder ver las nuevas variables. Recuerda que, en RStudio, la forma más sencilla de ver todas las columnas es View().
+
+```
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+```
+
+Tenga en cuenta que puede hacer referencia a las columnas que acaba de crear:
+
+```
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+Si solo desea conservar las nuevas variables, utilice transmute():
+
+
+```
+transmute(flights,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+## Resúmenes agrupados con summarise()
+
+El último verbo clave es "summarise()". Convierte un marco de datos en una sola fila:
+
+```
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+
+
+
