@@ -119,3 +119,60 @@ filter(flights, !(arr_delay > 120 | dep_delay > 120))
 filter(flights, arr_delay <= 120, dep_delay <= 120)
 ```
 
+## Ejercicio
+
+Encuentra todos los vuelos que 
+
+1. tuvieron un retraso de llegada (arrival delay) de dos o más horas
+2. Volaron a Houston (IAH o HOU)
+3. Salieron en verano (julio, agosto y septiembre)
+4. Llegaron con más de dos horas de retraso, pero no salieron tarde
+5. Tuvieron un retraso de al menos una hora, pero recuperaron más de 30 minutos en el vuelo
+6. Salieron entre la medianoche y las 6 a. m. (inclusive)
+
+## Organizar filas con arrange()
+
+**arrange()** funciona de forma similar a **filter()*, excepto que, en lugar de seleccionar filas, cambia su orden. Requiere un datafreama y un conjunto de nombres de columna (o expresiones más complejas) para ordenar. Si se proporciona más de un nombre de columna, cada columna adicional se usará para deshacer los empates en los valores de las columnas anteriores:
+
+```
+arrange(flights, year, month, day)
+```
+
+## Seleccionar columnas con select()
+
+No es raro obtener conjuntos de datos con cientos o incluso miles de variables. En este caso, el primer desafío suele ser centrarse en las variables que realmente interesan. **select()** permite ampliar rápidamente un subconjunto útil mediante operaciones basadas en los nombres de las variables.
+
+**select()** no es muy útil con los datos de vuelos, ya que solo tenemos 19 variables, pero aun así se puede tener una idea general:
+
+
+```
+# Select columns by name
+select(flights, year, month, day)
+# Seleccionar todas las columnas entre año y día (inclusive)
+select(flights, year:day)
+# Seleccionar todas las columnas excepto las de año a día (inclusive)
+select(flights, -(year:day))
+```
+
+Hay varias funciones auxiliares que puedes usar dentro de select():
+
+* starts_with("abc"): busca nombres que empiezan por "abc".
+
+* ends_with("xyz"): busca nombres que terminan por "xyz".
+
+* contains("ijk"): busca nombres que contienen "ijk".
+
+* matches("(.)\\1"): selecciona variables que coinciden con una expresión regular. Esta coincide con cualquier variable que contenga caracteres repetidos.
+  
+* num_range("x", 1:3): busca x1, x2 y x3.
+
+Consulta ?select para más detalles.
+
+**select()** puede usarse para renombrar variables, pero rara vez es útil porque omite todas las variables no mencionadas explícitamente. En su lugar, usa rename(), que es una variante de select() que conserva todas las variables no mencionadas explícitamente.
+
+```
+rename(flights, tail_num = tailnum)
+```
+
+Otra opción es usar **select()** junto con el asistente **everything()**. Esto es útil si tiene varias variables que desea mover al inicio del marco de datos.
+
