@@ -240,6 +240,95 @@ El último verbo clave es "summarise()". Convierte un marco de datos en una sola
 summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
 ```
 
+summarise() no es muy útil a menos que se combine con group_by(). Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Entonces, al usar los verbos dplyr en un marco de datos agrupado, se aplicarán automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un marco de datos agrupado por fecha, obtenemos el retraso promedio por fecha:
 
+
+```
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+Juntos, group_by() y summarise() proporcionan una de las herramientas que usarás con más frecuencia al trabajar con dplyr: los resúmenes agrupados. Pero antes de continuar, necesitamos presentar una nueva y poderosa idea: la tubería.
+
+## Combinación de múltiples operaciones con la tubería
+
+Imagina que quieres explorar la relación entre la distancia y el retraso promedio para cada ubicación. Con lo que sabes sobre dplyr, podrías escribir código como este:
+
+```
+by_dest <- group_by(flights, dest)
+delay <- summarise(by_dest,
+  count = n(),
+  dist = mean(distance, na.rm = TRUE),
+  delay = mean(arr_delay, na.rm = TRUE)
+)
+delay <- filter(delay, count > 20, dest != "HNL")
+
+# It looks like delays increase with distance up to ~750 miles 
+# and then decrease. Maybe as flights get longer there's more 
+# ability to make up delays in the air?
+ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
+  geom_point(aes(size = count), alpha = 1/3) +
+  geom_smooth(se = FALSE)
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+```
+
+Hay tres pasos para preparar estos datos:
+
+Agrupar vuelos por destino.
+
+Resumir para calcular la distancia, el retraso promedio y el número de vuelos.
+
+Filtrar para eliminar los puntos ruidosos y el aeropuerto de Honolulu, que está casi el doble de lejos que el aeropuerto más cercano.
+
+Escribir este código es un poco frustrante porque tenemos que asignar un nombre a cada trama de datos intermedia, aunque no nos importe. Nombrar las cosas es difícil, lo que ralentiza nuestro análisis.
+
+Hay otra forma de abordar el mismo problema con la tubería, %>%:
+
+```
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+```
+
+Esto se centra en las transformaciones, no en lo que se transforma, lo que facilita la lectura del código. Se puede interpretar como una serie de instrucciones imperativas: agrupar, resumir y filtrar. Como sugiere esta lectura, una buena forma de pronunciar %>% al leer código es "then".
+
+En segundo plano, x %>% f(y) se convierte en f(x, y), y x %>% f(y) %>% g(z) se convierte en g(f(x, y), z), y así sucesivamente. Se puede usar la tubería para reescribir múltiples operaciones de forma que se pueda leer de izquierda a derecha y de arriba a abajo. De ahora en adelante, usaremos la tubería con frecuencia porque mejora considerablemente la legibilidad del código, y la abordaremos con más detalle en las tuberías.
+
+Trabajar con la tubería es uno de los criterios clave para pertenecer al universo de tidy. La única excepción es ggplot2: se escribió antes de que se descubriera la tubería. Lamentablemente, la próxima iteración de ggplot2, ggvis, que sí utiliza la tubería, aún no está lista para su lanzamiento.
+
+## Valores faltantes
+
+Quizás te hayas preguntado sobre el argumento na.rm que usamos anteriormente. ¿Qué ocurre si no lo configuramos?
+
+```
+flights %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay))
+```
+
+¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación siguen la regla habitual de valores faltantes: si hay algún valor faltante en la entrada, la salida también lo será. Afortunadamente, todas las funciones de agregación tienen un argumento na.rm que elimina los valores faltantes antes del cálculo:
+
+```
+flights %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay, na.rm = TRUE))
+```
+
+En este caso, donde los valores faltantes representan vuelos cancelados, también podríamos solucionar el problema eliminando primero los vuelos cancelados. Guardaremos este conjunto de datos para poder reutilizarlo en los próximos ejemplos.
+
+
+```
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(mean = mean(dep_delay))
+```
 
 
