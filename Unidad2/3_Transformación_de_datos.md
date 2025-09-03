@@ -41,3 +41,39 @@ También habrás notado la fila de abreviaturas de tres (o cuatro) letras debajo
 
 * date significa fechas.
 
+
+## Fundamentos de dplyr
+
+Cinco funciones clave de dplyr que le permiten resolver la gran mayoría de sus desafíos de manipulación de datos:
+
+* Seleccionar observaciones por sus valores **(filter())**.
+
+* Reordenar las filas **(arrange())**.
+
+* Seleccionar variables por sus nombres **(select())**.
+
+* Crear nuevas variables con funciones de variables existentes **(mutate())**.
+
+* Reducir varios valores a un único resumen **(summarise())**.
+  
+Todas estas funciones se pueden usar junto con **group_by()**, que cambia el alcance de cada función de operar sobre todo el conjunto de datos a operar sobre él grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
+
+Todos los verbos funcionan de manera similar:
+
+* El primer argumento es un dataframe
+
+* Los argumentos subsiguientes describen qué hacer con el dataframe, utilizando los nombres de las variables (sin comillas).
+
+* El resultado es un nuevo marco de datos.
+
+Juntas, estas propiedades facilitan la conexión de varios pasos simples para obtener un resultado complejo. 
+
+
+## Filtrar filas con filter()
+
+filter() permite crear subconjuntos de observaciones según sus valores. El primer argumento es la dataframe. El segundo argumento y los siguientes son las expresiones que filtran el marco de datos. Por ejemplo, podemos seleccionar todos los vuelos del 1 de enero con:
+
+
+
+
+
