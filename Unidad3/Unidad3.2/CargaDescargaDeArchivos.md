@@ -109,4 +109,4 @@ Ejemplo de descarga:
 3. Para filtrar las secuencias, introduzca un criterio de búsqueda en el campo de filtro (o bien, deje el campo vacío).
 4. Seleccione la ejecución que desea descargar y, opcionalmente, seleccione «Filtrada» o «Recortada». A continuación, haga clic en el botón FASTA o FASTQ para descargar los datos en ese formato.
 
-
+## Revisar esta liga para más información [SRA](https://bioinformaticsworkbook.org/dataAcquisition/fileTransfer/sra.html#gsc.tab=0)
