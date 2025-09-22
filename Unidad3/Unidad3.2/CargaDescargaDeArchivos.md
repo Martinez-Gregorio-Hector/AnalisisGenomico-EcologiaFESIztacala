@@ -112,3 +112,37 @@ Ejemplo de descarga:
 4. Seleccione la ejecución que desea descargar y, opcionalmente, seleccione «Filtrada» o «Recortada». A continuación, haga clic en el botón FASTA o FASTQ para descargar los datos en ese formato.
 
 ## Revisar esta liga para más información [SRA](https://bioinformaticsworkbook.org/dataAcquisition/fileTransfer/sra.html#gsc.tab=0)
+
+# Subir secuencias en SRA (Sequence Read Archive)
+
+Revisar esta [documentación](https://www.ncbi.nlm.nih.gov/sra/docs/submitportal/) y un video de [youtube](https://www.youtube.com/watch?v=PTg9Ru68fc0)
+
+## Requisitos previos
+
+* SRA acepta secuencias de plataformas de secuenciación de alto rendimiento en formatos específicos (consulte la Guía de formatos de archivo de SRA para más detalles). SRA NO acepta datos ensamblados/de consenso ni contigs.
+
+* Para envíos de 1000 muestras o menos. Si tiene más de 1000 muestras, cree varios envíos con la misma referencia de BioProject.
+  
+* Los archivos pueden comprimirse con gzip o bzip2, y pueden archivarse en formato tar. No utilice ZIP. No es obligatorio archivar ni comprimir los archivos.
+
+* Cada archivo FASTQ enviado debe tener un tamaño inferior a 100 GB. Si los archivos comprimidos superan los 100 GB, divida el archivo antes de enviarlo.
+
+* Los estudios con más de 5 TB de datos deben dividirse en varios envíos, manteniendo cada envío por debajo de 5 TB y esperando a que se complete cada envío antes de enviar el siguiente conjunto de archivos. Los envíos pueden vincularse al mismo BioProject para garantizar que todos los datos sean indexables con una única identificación.
+  
+* SRA no acepta envíos de archivos duplicados, y estos envíos pueden ser rechazados sin previo aviso. Además, enviar datos duplicados provocará retrasos significativos en el procesamiento. Para actualizar un registro existente, no vuelva a enviar los archivos de datos; en su lugar, póngase en contacto con el servicio de asistencia de SRA (sra@ncbi.nlm.nih.gov).
+
+## Envío de datos
+
+Acceda al asistente de envío de datos de SRA
+
+
+En la página principal del [portal de envío](https://submit.ncbi.nlm.nih.gov/), acceda a SRA o inicie sesión directamente en el asistente de envío de datos de SRA.
+
+
+
+
+Crear nuevo envío
+Solicite una carpeta personal para pre-subir sus archivos de datos de secuencia (para usuarios nuevos) haciendo clic en el botón «Solicitar carpeta de pre-subida».
+
+Figura 1: Solicitud de carpeta personal para la pre-subida de archivos
+
