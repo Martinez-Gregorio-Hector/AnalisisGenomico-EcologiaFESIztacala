@@ -135,6 +135,12 @@ Revisar esta [documentación](https://www.ncbi.nlm.nih.gov/sra/docs/submitportal
 
 Antes de que accedas al portal de SRA, descargue los archivos que vamos a usar como ejemplo para subirlo en el portal. Utilice este link para descargar los archivos [FASTQ](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/tree/main/Unidad3/Unidad3.2/fastq_SRA)
 
+Puedes descargar directamente los FASTQ o puede clonar todo el repositorio para descargar todos los scripts y los archivos 
+
+```
+git clone https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala.git
+```
+
 Acceda al asistente de envío de datos de SRA
 
 En la página principal del [portal de envío](https://submit.ncbi.nlm.nih.gov/), acceda a SRA o inicie sesión directamente en el asistente de envío de datos de SRA.
