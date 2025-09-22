@@ -69,6 +69,8 @@ fasterq-dump --split-files SRR25023041
 fasterq-dump --split-files SRR25023042
 ```
 
+Otras alternativas de como descargar mediante bucles, checar este [link](https://bioinformatics-core-shared-training.github.io/Bulk_RNAseq_Course_2021/Markdowns/S1_Getting_raw_reads_from_SRA.html) 
+
 ## Descargar metadatos asociados a los datos de SRA
 
 Los archivos de ejecución de SRA no contienen información sobre los metadatos (información de la muestra, etc.) vinculados a los datos.
