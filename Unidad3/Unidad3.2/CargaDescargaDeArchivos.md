@@ -154,5 +154,26 @@ En la página principal del [portal de envío](https://submit.ncbi.nlm.nih.gov/)
 
 Solicite una carpeta personal para pre-subir sus archivos de datos de secuencia (para usuarios nuevos) haciendo clic en el botón **submit**.
 
-Figura 1: Solicitud de carpeta personal para la pre-subida de archivos
+Una vez que solicites una carpeta personal, como se observa a continuación, dale click en **New submission**.
+
+Inicialmente te aparece 5 pestañas, conforme vas llenando los datos, te va desbloqueando otras pestañas para que puedas subir los FASTQ, la metadata, e información adicional de la secuenciación masiva.
+
+**1. SUBMITTER**
+
+**2. GENERAL INFO**
+
+**3. SRA METADATA**
+
+**4. FILES**
+
+**5. REVIEW & SUBMIT**
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/Figuras/PortalSRA_3.png? raw=true" alt="shell" >
+</p>
+
+
+
+
+
 
