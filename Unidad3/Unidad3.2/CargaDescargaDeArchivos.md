@@ -1,1 +1,72 @@
+# Descargar secuencias en SRA (Sequence Read Archive)
+
+1. Las instrucciones para este ejercicio vienen de este [link](https://www.ncbi.nlm.nih.gov/sra/docs/sradownload/)
+2. Usaremos esta liga para irnos a [SRA](https://www.ncbi.nlm.nih.gov/sra/)
+3. Usaremos este artículo como referencia para descargar los [FASTQ](https://www.nature.com/articles/s41698-024-00611-z) que estan depositado en SRA
+
+## Archivos que se descargaran en SRA
+
+Los datos que vamos a descargar están disponibles en el repositorio SRA con los números de acceso: **PRJNA987643** y **PRJNA987641**.
+
+Crear un archivo que se llame **SraAccList.txt** para descargar los archivos FASTQ
+
+```
+SRR25023039
+SRR25023040
+SRR25023041
+SRR25023042
+```
+
+## Descargar archivos de datos de secuencia utilizando SRA Toolkit
+
+[Instalar SRA toolkit](https://github.com/ncbi/sra-tools/wiki/)
+
+## Descarga de datos públicos
+
+**Prefetch** es una herramienta de la suite SRA. Este programa descarga los conjuntos de datos (archivos de secuencias en formato SRA comprimido) y todos los datos adicionales necesarios para convertirlos a un formato más común. **Prefetch** también permite completar o corregir descargas de datos incompletas.
+
+Utilice el siguiente comando de **Prefetch** para descargar los conjuntos de datos mencionados anteriormente en formato SRA.
+
+Utilice el comando prefetch para descargar los datos de ejecución del ejemplo anterior en formato SRA.
+
+Para un solo dato:
+
+```
+$ prefetch SRR000001
+```
+
+Para una lista de datos:
+
+```
+prefetch --option-file SraAccList.txt
+```
+
+Se genera los siguientes datos
+
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/SRA.png? raw=true" alt="shell" >
+</p>
+
+Unidad3/Unidad3.2/SRA.png
+
+Las herramientas **fasterq-dump** y **sam-dump**, que también forman parte de la suite de herramientas SRA, permiten convertir los datos de ejecución descargados (en formato SRA comprimido) a los formatos FASTQ o SAM. Por ejemplo:
+
+```
+fasterq-dump --split-files SRR11180057.sra
+```
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/SRA2.png? raw=true" alt="shell" >
+</p>
+
+También puede omitir el paso de descarga previa y realizar la conversión directamente, introduciendo solo el identificador de la ejecución (sin la extensión .sra) en el comando **fasterq-dump** o **sam-dump**:
+
+```
+fasterq-dump --split-files SRR25023039
+fasterq-dump --split-files SRR25023040
+fasterq-dump --split-files SRR25023041
+fasterq-dump --split-files SRR25023042
+```
+
 
