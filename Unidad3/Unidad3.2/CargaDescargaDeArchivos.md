@@ -133,11 +133,15 @@ Revisar esta [documentación](https://www.ncbi.nlm.nih.gov/sra/docs/submitportal
 
 ## Envío de datos
 
-Acceda al asistente de envío de datos de SRA
+Antes de que accedas al portal de SRA, descargue los archivos que vamos a usar como ejemplo para subirlo en el portal. Utilice este link para descargar los archivos [FASTQ](https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/tree/main/Unidad3/Unidad3.2/fastq_SRA)
 
+Acceda al asistente de envío de datos de SRA
 
 En la página principal del [portal de envío](https://submit.ncbi.nlm.nih.gov/), acceda a SRA o inicie sesión directamente en el asistente de envío de datos de SRA.
 
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/Figuras/PortalSRA.png? raw=true" alt="shell" >
+</p>
 
 
 
