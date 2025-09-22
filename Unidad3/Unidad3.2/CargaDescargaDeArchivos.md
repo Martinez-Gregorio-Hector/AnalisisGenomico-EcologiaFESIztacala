@@ -69,4 +69,41 @@ fasterq-dump --split-files SRR25023041
 fasterq-dump --split-files SRR25023042
 ```
 
+## Descargar metadatos asociados a los datos de SRA
 
+Los archivos de ejecución de SRA no contienen información sobre los metadatos (información de la muestra, etc.) vinculados a los datos.
+
+Para descargar los metadatos de cada ejecución de su consulta en Entrez, haga clic en «Enviar a» en la parte superior de la página, seleccione la opción «Archivo» y elija «RunInfo» en el menú desplegable.
+
+Esto generará un archivo tabular SraRunInfo.csv con los metadatos disponibles para cada ejecución.
+
+Desde el selector de ejecuciones
+Puede descargar un conjunto ligeramente diferente de metadatos en un archivo delimitado por tabulaciones desde la imagen externa del selector de ejecuciones.
+
+Para descargar los metadatos de cada ejecución de su consulta en Entrez:
+
+Haga clic en **send to** en la parte superior de la página, seleccione la opción **Run Selector**  y haga clic en **go**
+Si es necesario, refine los resultados utilizando los filtros disponibles en la interfaz del selector de ejecuciones.
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/SRA_info.png? raw=true" alt="shell" >
+</p>
+
+
+Haga clic en el botón «Metadata». Esto generará un archivo tabular SraRunTable.csv con los metadatos disponibles para cada ejecución.
+
+
+<p align="center">  
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/SRA_metadata.png? raw=true" alt="shell" >
+</p>
+
+
+## Descargar datos de secuencia desde el navegador de ejecuciones
+
+La herramienta de visualización de ejecuciones [Run Browser](https://www.ncbi.nlm.nih.gov/Traces/index.html?view=run_browser&display=metadata) permite la descarga limitada (una ejecución a la vez, con menos de 5 Gb de secuencia, mediante HTTP) de datos de secuencia en formato FASTA o FASTQ.
+
+Ejemplo de descarga:
+Abra la ejecución seleccionada en el navegador de ejecuciones.
+Haga clic en la pestaña «Descargar FASTA/FASTQ».
+Para filtrar las secuencias, introduzca un criterio de búsqueda en el campo de filtro (o bien, deje el campo vacío).
+Seleccione la ejecución que desea descargar y, opcionalmente, seleccione «Filtrada» o «Recortada». A continuación, haga clic en el botón FASTA o FASTQ para descargar los datos en ese formato.
