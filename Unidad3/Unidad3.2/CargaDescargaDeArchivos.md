@@ -103,7 +103,10 @@ Haga clic en el botón «Metadata». Esto generará un archivo tabular SraRunTab
 La herramienta de visualización de ejecuciones [Run Browser](https://www.ncbi.nlm.nih.gov/Traces/index.html?view=run_browser&display=metadata) permite la descarga limitada (una ejecución a la vez, con menos de 5 Gb de secuencia, mediante HTTP) de datos de secuencia en formato FASTA o FASTQ.
 
 Ejemplo de descarga:
-Abra la ejecución seleccionada en el navegador de ejecuciones.
-Haga clic en la pestaña «Descargar FASTA/FASTQ».
-Para filtrar las secuencias, introduzca un criterio de búsqueda en el campo de filtro (o bien, deje el campo vacío).
-Seleccione la ejecución que desea descargar y, opcionalmente, seleccione «Filtrada» o «Recortada». A continuación, haga clic en el botón FASTA o FASTQ para descargar los datos en ese formato.
+
+1. Abra el navegador de ejecuciones [Run Browser](https://www.ncbi.nlm.nih.gov/Traces/index.html?view=run_browser&display=metadata)
+2. Introduzca el número de acceso, por ejemplo, SRR25023039
+3. Para filtrar las secuencias, introduzca un criterio de búsqueda en el campo de filtro (o bien, deje el campo vacío).
+4. Seleccione la ejecución que desea descargar y, opcionalmente, seleccione «Filtrada» o «Recortada». A continuación, haga clic en el botón FASTA o FASTQ para descargar los datos en ese formato.
+
+
