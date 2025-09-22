@@ -146,13 +146,13 @@ Acceda al asistente de envío de datos de SRA
 En la página principal del [portal de envío](https://submit.ncbi.nlm.nih.gov/), acceda a SRA o inicie sesión directamente en el asistente de envío de datos de SRA.
 
 <p align="center">  
-  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/Figuras/PortalSRA.png? raw=true" alt="shell" >
+  <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/Figuras/PortalSRA2.png? raw=true" alt="shell" >
 </p>
 
 
+## Crear nuevo envío
 
-Crear nuevo envío
-Solicite una carpeta personal para pre-subir sus archivos de datos de secuencia (para usuarios nuevos) haciendo clic en el botón «Solicitar carpeta de pre-subida».
+Solicite una carpeta personal para pre-subir sus archivos de datos de secuencia (para usuarios nuevos) haciendo clic en el botón **submit**.
 
 Figura 1: Solicitud de carpeta personal para la pre-subida de archivos
 
