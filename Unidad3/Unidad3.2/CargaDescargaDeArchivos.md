@@ -168,9 +168,20 @@ Inicialmente te aparece 5 pestañas, conforme vas llenando los datos, te va desb
 
 **5. REVIEW & SUBMIT**
 
+Esto aparece después 
+
+**6. SRA METADATA**
+
+**7. FILES**
+
+**8. REVIEW & SUBMIT**
+
 <p align="center">  
   <img src="https://github.com/Martinez-Gregorio-Hector/AnalisisGenomico-EcologiaFESIztacala/blob/main/Unidad3/Unidad3.2/Figuras/PortalSRA_3.png? raw=true" alt="shell" >
 </p>
+
+
+
 
 
 
