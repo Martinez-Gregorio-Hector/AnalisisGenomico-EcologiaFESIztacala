@@ -13,3 +13,8 @@ source activate qiime2-amplicon-2023.9
 Dirección de la base de datos de silva
 
 /home/lab13/Reference/Referencia_silva_138/silva-138-99-nb-classifier.qza
+
+
+Tutorial para analizar los datos obtenidos de qiime2
+
+https://chiliubio.github.io/microeco_tutorial/index.html
