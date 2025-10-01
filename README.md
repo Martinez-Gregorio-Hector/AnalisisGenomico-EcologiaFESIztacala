@@ -37,4 +37,6 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 [Taller bioinfo Vinuesta](https://github.com/vinuesa/intro2linux)
 
+[Curso avanzado de programación](https://vinuesa.github.io/intro2linux/index.html#expresiones-regulares---una-breve-introducci%C3%B3n)
+
 
