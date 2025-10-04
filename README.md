@@ -39,4 +39,8 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 [Curso avanzado de programación](https://vinuesa.github.io/intro2linux/index.html#expresiones-regulares---una-breve-introducci%C3%B3n)
 
+[Advancecd R](https://adv-r.hadley.nz/index.html)
+
+[R for data science](https://r4ds.had.co.nz/index.html)
+
 
