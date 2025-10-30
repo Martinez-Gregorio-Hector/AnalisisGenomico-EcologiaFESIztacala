@@ -10,7 +10,7 @@
 
 **Virus**
 
-[Vale-David-Aldair]((https://github.com/DaCruz39/Analisis-Geneticos)
+[Vale-David-Aldair](https://github.com/DaCruz39/Analisis-Geneticos)
 
 **Pseudomonas**
 
