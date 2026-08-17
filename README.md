@@ -8,7 +8,7 @@ Lunes 14 a 17 horas
 
 Martes 14 a 17 horas 
 
-Miércoles 14 a 16 horas 
+Jueves 14 a 16 horas 
 
 ## Definir lugar para la clase los días 21, 22 y 24 de septiembre, y 16, 17 y 19 de noviembre
 
