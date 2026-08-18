@@ -27,10 +27,9 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 ### Unidad 4. Análisis genómico
 
 4.1 Análisis de genoma completo
-
-4.2 Análisis de microbioma
-
+4.2 Análisis de microbioma 
 4.3 Análisis de RAD-seq
+4.4 Identificación de variantes somáticas
 
 
 ## Bibliografia
