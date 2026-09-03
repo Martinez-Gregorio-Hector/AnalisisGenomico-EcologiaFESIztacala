@@ -44,4 +44,6 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 [R for data science](https://r4ds.had.co.nz/index.html)
 
+[PythonistaMX](https://github.com/PythonistaMX/py101)
+
 
