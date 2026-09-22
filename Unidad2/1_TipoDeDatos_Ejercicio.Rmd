@@ -1,0 +1,248 @@
+---
+title: "Trabajo Final: Tipos de Datos, Objetos y Visualización con ggplot2"
+subtitle: "Aplicaciones para Ecología"
+output:
+  html_document: default
+  pdf_document: default
+date: "2026-09-21"
+---
+
+# Introducción
+
+Este trabajo integra dos temas fundamentales del curso: **tipos de datos y objetos en R** (variables, vectores, matrices, factores, data frames y listas) y **visualización de datos con ggplot2**. Todos los ejercicios están diseñados con ejemplos ecológicos: censos de especies, muestreos en sitios de estudio, biomasa, diversidad y variables ambientales, de modo que puedas aplicar directamente estas herramientas a tus propios datos de campo.
+
+No es necesario ningún archivo externo: los datos se crean directamente en el documento para que puedas practicar sin depender de rutas de archivos.
+
+---
+
+# Parte 1. Variables y tipos de datos
+
+## Ejercicio 1.1 — Variables de un sitio de muestreo
+
+Imagina que llegas a un sitio de monitoreo de aves y registras algunos datos básicos.
+
+```{r}
+# Completa las asignaciones con los símbolos <-, -> o =
+sitio <- "Bosque_La_Cañada"      # nombre del sitio (caracter)
+altitud_m <- 2350                 # altitud en metros (numérico)
+dosel_cerrado <- TRUE             # ¿el dosel está cerrado? (lógico)
+28.4 -> temp_c                    # temperatura registrada (numérico)
+
+sitio
+altitud_m
+dosel_cerrado
+temp_c
+```
+
+**Preguntas**
+
+1. ¿Cuál es la clase (`class()`) de cada una de las cuatro variables anteriores?
+2. Crea una variable `humedad_relativa` con un valor entre 0 y 100 y verifica su clase.
+3. ¿Cuáles de los siguientes nombres de variable son válidos para registrar el número de individuos observados? Justifica tu respuesta sin ejecutar el código primero.
+
+```{r}
+# 1individuos <- 12
+# n_individuos <- 12
+# n.individuos_sp1 <- 5
+# num-individuos <- 8
+```
+
+## Ejercicio 1.2 — Valores perdidos en campo
+
+En un muestreo de vegetación, algunos cuadrantes no pudieron evaluarse por mal clima, y otros produjeron valores matemáticamente indefinidos al calcular índices.
+
+```{r}
+cobertura_cuadrante <- c(45, 60, NA, 30, NA, 55)
+cobertura_cuadrante
+mean(cobertura_cuadrante)              # ¿qué obtienes?
+mean(cobertura_cuadrante, na.rm = TRUE) # ahora ignorando los NA
+```
+
+**Preguntas**
+
+1. ¿Por qué `mean()` regresa `NA` en el primer caso?
+2. Calcula `log(0)` y `-5/0`. ¿Qué representa cada resultado (`NaN` vs `Inf`)?
+3. En tus propios datos de campo, ¿en qué situaciones esperarías generar valores `NA`?
+
+## Ejercicio 1.3 — Operadores y decisiones ecológicas
+
+Un protocolo de monitoreo considera "sitio prioritario para conservación" si la riqueza de especies es mayor a 15 **y** la cobertura de dosel es mayor al 70%.
+
+```{r}
+riqueza_especies <- 18
+cobertura_dosel <- 72
+
+# Evalúa la condición usando operadores relacionales y lógicos
+prioritario <- (riqueza_especies > 15) & (cobertura_dosel > 70)
+prioritario
+```
+
+**Preguntas**
+
+1. Cambia los valores de `riqueza_especies` y `cobertura_dosel` para que el sitio **no** sea prioritario y verifica el resultado.
+2. Un segundo criterio (regla alternativa) considera prioritario un sitio si tiene riqueza > 20 **o** si es hábitat de una especie amenazada (`especie_amenazada <- TRUE`). Escribe la expresión lógica correspondiente.
+3. Usando la tabla de funciones matemáticas, calcula la raíz cuadrada del área muestreada (`area_m2 <- 400`) y redondea a 1 decimal el índice de Shannon `H <- 2.1367`.
+
+---
+
+# Parte 2. Vectores
+
+## Ejercicio 2.1 — Abundancia de especies
+
+Durante un transecto se contó el número de individuos de 6 especies de mariposas.
+
+```{r}
+especies <- c("Danaus_plexippus", "Vanessa_cardui", "Papilio_multicaudata",
+              "Colias_eurytheme", "Junonia_coenia", "Pieris_rapae")
+abundancia <- c(23, 15, 4, 31, 9, 42)
+
+names(abundancia) <- especies
+abundancia
+```
+
+**Preguntas**
+
+1. Obtén la abundancia de la tercera especie del vector usando índices.
+2. Extrae la abundancia de `"Danaus_plexippus"` y `"Pieris_rapae"` usando un solo comando con `c()`.
+3. Calcula: abundancia total del transecto, especie con mayor abundancia (`max()`), y promedio de individuos por especie.
+4. Excluye del vector la especie con menor abundancia usando el operador `-`.
+5. Multiplica el vector `abundancia` por un factor de corrección de detección de 1.15 (asumiendo que no todos los individuos fueron detectados). ¿Qué operación vectorial de R permite hacer esto en una sola línea?
+
+## Ejercicio 2.2 — Tu propio muestreo
+
+1. Genera un vector `crecimiento_cm` con las mediciones de crecimiento en altura (cm) de al menos 5 plántulas de una especie de árbol después de 6 meses.
+2. Asigna un nombre a cada plántula (`Plantula_1`, `Plantula_2`, ...) usando `names()`.
+3. Calcula el promedio, el valor mínimo y máximo de crecimiento.
+4. Agrega dos plántulas más al vector, junto con sus datos de crecimiento y nombres.
+
+---
+
+# Parte 3. Matrices
+
+## Ejercicio 3.1 — Abundancia de especies por sitio
+
+Un estudio registró la abundancia de 4 especies de anfibios en 5 sitios de muestreo.
+
+```{r}
+datos_anfibios <- c(12, 8, 0, 5, 3,
+                     4, 15, 2, 0, 7,
+                     0, 1, 9, 6, 2,
+                     20, 5, 3, 1, 0)
+
+matriz_anfibios <- matrix(datos_anfibios, nrow = 5, ncol = 4)
+rownames(matriz_anfibios) <- c("Sitio1", "Sitio2", "Sitio3", "Sitio4", "Sitio5")
+colnames(matriz_anfibios) <- c("Rana_sp1", "Rana_sp2", "Sapo_sp1", "Salamandra_sp1")
+matriz_anfibios
+```
+
+**Preguntas**
+
+1. Obtén la abundancia de `Sapo_sp1` en `Sitio3` usando índices `[fila, columna]`.
+2. Obtén todos los datos del `Sitio2` (todas las especies).
+3. Obtén los datos de todas las especies, pero sólo de los sitios 1 a 3.
+4. Calcula la riqueza total por sitio (número de individuos, `rowSums()`) y la abundancia total por especie (`colSums()`).
+5. ¿En qué sitio hubo mayor abundancia total? ¿Qué función usarías para saberlo sin leer la tabla manualmente?
+6. Se hizo un muestreo adicional en un sexto sitio. Usa `rbind()` para agregarlo con los valores: `Rana_sp1 = 6, Rana_sp2 = 6, Sapo_sp1 = 4, Salamandra_sp1 = 1`.
+
+## Ejercicio 3.2 — Matriz de tu diseño
+
+1. Genera una matriz de 3 renglones y 5 columnas que represente la cobertura vegetal (%) de 3 parcelas en 5 fechas de muestreo distintas (usa los valores que quieras, entre 0 y 100).
+2. Asigna como nombres de renglón: `Parcela1`, `Parcela2`, `Parcela3`.
+3. Asigna como nombres de columna: `Fecha1`, ..., `Fecha5`.
+4. Obtén el promedio, el máximo y el mínimo de cobertura registrados en todo el experimento.
+5. Agrega una cuarta parcela con datos de tu elección.
+
+---
+
+# Parte 4. Factores
+
+## Ejercicio 4.1 — Categorías de hábitat
+
+En un estudio de aves se registró el tipo de hábitat donde se observó cada individuo.
+
+```{r}
+habitat <- factor(c("Bosque", "Pastizal", "Bosque", "Humedal",
+                     "Pastizal", "Bosque", "Humedal", "Humedal"))
+habitat
+levels(habitat)
+summary(habitat)
+```
+
+**Preguntas**
+
+1. ¿Cuántas categorías (niveles) tiene el factor `habitat`?
+2. ¿Cuántas observaciones corresponden a `"Bosque"`?
+3. Crea un factor `estado_conservacion` con al menos 6 observaciones usando las categorías `"Preocupacion_menor"`, `"Vulnerable"` y `"En_peligro"`, y obtén su resumen con `summary()`.
+4. ¿Por qué es útil declarar una variable categórica como `factor` en lugar de dejarla como texto (`character`), pensando en análisis estadísticos posteriores?
+
+---
+
+# Parte 5. Data frames
+
+## Ejercicio 5.1 — Base de datos de un muestreo de vegetación
+
+```{r}
+muestreo_veg <- data.frame(
+  parcela      = c("P1", "P2", "P3", "P4", "P5"),
+  tipo_veg     = c("Bosque_pino", "Matorral", "Bosque_encino", "Pastizal", "Matorral"),
+  riqueza_sp   = c(22, 11, 19, 7, 13),
+  biomasa_kg   = c(340.5, 120.2, 298.7, 45.1, 133.8),
+  altitud_m    = c(2800, 2400, 2650, 2200, 2350),
+  row.names    = c("m1", "m2", "m3", "m4", "m5")
+)
+muestreo_veg
+str(muestreo_veg)
+```
+
+**Preguntas**
+
+1. Extrae la columna `biomasa_kg` usando el operador `$`.
+2. Extrae la misma columna usando corchetes con el nombre entre comillas, y usando el índice numérico.
+3. Obtén el registro completo (todas las columnas) de la parcela `m3`.
+4. Obtén sólo las columnas `riqueza_sp` y `biomasa_kg` para todas las parcelas.
+5. Excluye del data frame la parcela `m4`.
+6. Calcula la biomasa promedio y máxima **sólo** con las columnas numéricas (`riqueza_sp`, `biomasa_kg`, `altitud_m`).
+7. Usa `head()` y `str()` para explorar la estructura del data frame. ¿Qué tipo de dato (clase) tiene cada columna?
+
+## Ejercicio 5.2 — Tu propio data frame ecológico
+
+Con los siguientes vectores, genera un data frame llamado `mamiferos`:
+
+```{r}
+especie    <- c("Puma concolor", "Odocoileus virginianus", "Canis latrans",
+                 "Lynx rufus", "Sylvilagus floridanus", "Procyon lotor")
+gremio_trof <- c("Carnivoro", "Herbivoro", "Omnivoro",
+                  "Carnivoro", "Herbivoro", "Omnivoro")
+registros   <- c(3, 18, 27, 9, 45, 22)
+peso_kg     <- c(62, 55, 12, 8, 1.2, 6.5)
+nocturno    <- c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE)
+```
+
+1. Construye el data frame `mamiferos` con estos 5 vectores como columnas.
+2. Obtén el número de registros totales y el peso promedio de todas las especies.
+3. Filtra (usando índices) sólo las especies con `gremio_trof == "Carnivoro"`. *(Pista: puedes usar `mamiferos[mamiferos$gremio_trof == "Carnivoro", ]`, aprovechando los operadores relacionales de la Parte 1.)*
+4. Aplica `summary()` al data frame completo. ¿Qué diferencia notas entre cómo se resume una columna numérica y una columna lógica o de texto?
+
+---
+
+# Parte 6. Listas
+
+## Ejercicio 6.1 — Ficha de una especie
+
+```{r}
+ficha_especie <- list(
+  nombre_cientifico = "Quercus rugosa",
+  nombre_comun = "Encino roble",
+  alturas_individuos_m = c(8.2, 12.5, 6.7, 15.1, 9.8),
+  estado_conservacion = "Preocupacion_menor",
+  presente_en_sitios = c("Sitio1", "Sitio3", "Sitio5")
+)
+ficha_especie
+```
+
+**Preguntas**
+
+1. Extrae el componente `alturas_individuos_m` usando `[[ ]]` y usando `$`. ¿En qué se diferencian los resultados de `ficha_especie[1]` y `ficha_especie[[1]]`? Verifica con `class()`.
+2. Calcula la altura promedio de los individuos de esta especie.
+3. Obtén el primer sitio en el que está presente la especie (elemento 1 del componente `presente_en_sitios`).
+4. Crea tu propia lista llamada `ficha_fauna` para una especie animal de tu elección, con al menos: nombre científico, un vector numérico de mediciones (peso, longitud, etc.), y un vector de sitios donde fue registrada. Extrae y muestra cada componente.
