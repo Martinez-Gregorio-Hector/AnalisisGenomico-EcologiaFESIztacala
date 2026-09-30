@@ -1,0 +1,382 @@
+---
+title: "Ejercicio final: Diversidad de aves en un paisaje fragmentado"
+subtitle: "Data Wrangling con R (dplyr + tidyr + ggplot2)"
+author: "Nombre del alumno:"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly
+params:
+  soluciones: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+
+# Versión alumno:   rmarkdown::render("03_EjercicioFinal_Ecologia.Rmd")
+# Versión profesor: rmarkdown::render("03_EjercicioFinal_Ecologia.Rmd",
+#                                     params = list(soluciones = TRUE),
+#                                     output_file = "03_EjercicioFinal_Ecologia_SOLUCIONES.html")
+# Los bloques con sol = TRUE solo se muestran y ejecutan en la versión profesor.
+knitr::opts_hooks$set(sol = function(options) {
+  options$echo <- params$soluciones
+  options$eval <- params$soluciones
+  options
+})
+```
+
+# Contexto
+
+Un grupo de investigación está evaluando cómo la **transformación del bosque** afecta a la comunidad de aves en una región montañosa. Durante 2024 se realizaron **conteos por punto** en **12 sitios** que pertenecen a tres tipos de hábitat:
+
+- **Bosque conservado** (S01–S04)
+- **Bosque secundario** (S05–S08)
+- **Pastizal** (S09–S12)
+
+Cada sitio se visitó **6 veces** (enero, marzo, mayo, julio, septiembre y noviembre). En cada visita se anotó cada especie observada y su número de individuos.
+
+Tienes tres archivos en la carpeta `data/`:
+
+| Archivo | Descripción |
+|---|---|
+| `aves_conteos.csv` | Un renglón por especie registrada en cada visita: `sitio_id`, `fecha`, `hora_inicio`, `observador`, `especie`, `gremio` (gremio trófico), `abundancia` (nº de individuos). |
+| `aves_sitios.csv` | Características de cada sitio: `habitat`, `altitud_m`, `cobertura_dosel_pct`, `dist_poblado_km`. |
+| `aves_clima_wide.csv` | Precipitación mensual (mm) por sitio en **formato ancho**: una columna por mes (`mes_01` … `mes_12`). |
+
+**Pregunta de investigación:** *¿La riqueza, la diversidad y la composición de la comunidad de aves difieren entre hábitats? ¿Influye la temporada (secas vs. lluvias)?*
+
+**Instrucciones:**
+
+- Escribe tu código en los bloques vacíos (`# Tu código aquí`).
+- Usa **pipes** (`%>%`) siempre que sea posible.
+- Contesta las preguntas marcadas con ✍️ con texto debajo de cada una.
+- Al terminar, haz **Knit** para generar el HTML y entrégalo junto con el `.Rmd`.
+
+---
+
+# Carga y exploración de los datos
+
+```{r}
+library(tidyverse)
+```
+
+**1.1** Importa los tres archivos con `read_csv()` y guárdalos en los objetos `conteos`, `sitios` y `clima_wide`.
+
+```{r}
+# Tu código aquí
+conteos    <- read_csv("../data/aves_conteos.csv")
+sitios     <- read_csv("../data/aves_sitios.csv")
+clima_wide <- read_csv("../data/aves_clima_wide.csv")
+
+
+```
+
+**1.2** Explora `conteos` con `head()` y `glimpse()`.
+
+```{r}
+# Tu código aquí
+head(conteos)
+glimpse(conteos)
+```
+
+
+✍️ ¿Cuántos registros (renglones) y cuántas variables tiene `conteos`? ¿De qué tipo es la columna `fecha`?
+
+---
+
+# Seleccionar columnas y filtrar renglones
+
+**2.1** Usando `select()`, crea un data frame solo con `sitio_id`, `fecha`, `especie` y `abundancia`. Muestra los primeros 6 renglones.
+
+```{r}
+# Tu código aquí
+conteos %>%
+  select(sitio_id, fecha, especie, abundancia) %>%
+  head()
+
+```
+
+
+**2.2** En la tabla `sitios`, selecciona `sitio_id` y todas las columnas que **terminen** en `_pct` o `_km` (pista: `ends_with()`).
+
+```{r}
+# Tu código aquí
+sitios %>%
+  select(sitio_id, ends_with("_pct"), ends_with("_km"))
+```
+
+
+**2.3 Datos faltantes.** En campo, a veces se anota la especie pero se olvida el número de individuos. Filtra los registros donde `abundancia` es `NA`.
+
+```{r}
+# Tu código aquí
+conteos %>%
+  filter(is.na(abundancia))
+```
+
+
+✍️ ¿Cuántos registros no tienen abundancia? ¿Qué observador(es) los anotaron?
+
+**2.4** Crea un nuevo objeto `conteos_limpios` que **excluya** los registros con `abundancia` faltante. **Usa este objeto en el resto del ejercicio.**
+
+```{r}
+# Tu código aquí
+conteos_limpios <- conteos %>%
+  filter(!is.na(abundancia))
+
+nrow(conteos_limpios)
+
+```
+
+
+**2.5** *Setophaga coronata* (chipe coronado) es una especie **migratoria**. Filtra sus registros y ordénalos por fecha con `arrange()`.
+
+```{r}
+# Tu código aquí
+conteos_limpios %>%
+  filter(especie == "Setophaga coronata") %>%
+  arrange(fecha)
+```
+
+
+✍️ ¿En qué meses aparece? ¿Tiene sentido con su biología?
+
+**2.6** Filtra los registros de **granívoros** con **más de 5 individuos** que ocurrieron en los sitios **S09 o S10**. Usa `&` y `|` (o `%in%`).
+
+```{r}
+# Tu código aquí
+conteos_limpios %>%
+  filter(gremio == "Granívoro" &
+         abundancia > 5 &
+         (sitio_id == "S09" | sitio_id == "S10"))
+```
+
+**2.7** ¿Cuáles fueron los 10 registros con mayor abundancia? (pista: `arrange(desc())` y `slice()`).
+
+```{r}
+# Tu código aquí
+conteos_limpios %>%
+  arrange(desc(abundancia)) %>%
+  slice(1:10)
+```
+
+---
+
+# Crear nuevas variables con `mutate()`
+
+**3.1** Agrega a `conteos_limpios` las siguientes columnas (usa `lubridate`):
+
+- `mes`: número de mes de la fecha (`month()`).
+- `dia_semana`: día de la semana (`wday()`, con `label = TRUE`).
+- `temporada`: `"lluvias"` si el mes está entre junio y octubre, `"secas"` en caso contrario (usa `ifelse()` y `%in%`).
+
+Sobrescribe `conteos_limpios` con el resultado.
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**3.2** En la tabla `sitios`, crea una variable `perturbacion` que valga `"alta"` si la cobertura de dosel es menor a 50% y `"baja"` en caso contrario.
+
+```{r}
+# Tu código aquí
+
+```
+
+---
+
+# Resumir datos: split-apply-combine
+
+**4.1** Usa `count()` para saber **en cuántos registros** apareció cada especie. Ordena de mayor a menor y nombra la columna `n_registros`.
+
+```{r}
+# Tu código aquí
+
+```
+
+**4.2** Calcula la **abundancia total** (suma de individuos) por especie. ¿Cuál es la especie más abundante de todo el estudio?
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**4.3 Riqueza por visita.** Cada renglón es una especie distinta registrada en una visita. Por lo tanto, el número de renglones por `sitio_id` y `fecha` es la **riqueza de especies (S)** de esa visita. Calcula, para cada visita: la riqueza (`n()`) y la abundancia total. Guarda el resultado como `por_visita`.
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**4.4 Índice de diversidad de Shannon.** Para cada **sitio** (juntando las 6 visitas) calcula:
+
+$$H' = -\sum_{i=1}^{S} p_i \ln(p_i) \qquad J' = \frac{H'}{\ln(S)}$$
+
+donde $p_i$ es la proporción de individuos de la especie *i* en el sitio y $J'$ es la equitatividad de Pielou.
+
+Pasos sugeridos:
+
+1. Agrupa por `sitio_id` y `especie` y suma la abundancia.
+2. Agrupa solo por `sitio_id` y con `mutate()` calcula `p = abund / sum(abund)` (¡`mutate()` respeta los grupos!).
+3. Con `summarize()` calcula `S = n()`, `N = sum(abund)`, `H = -sum(p * log(p))` y `J = H / log(S)`.
+
+Guarda el resultado como `diversidad`.
+
+```{r}
+# Tu código aquí
+
+```
+
+---
+
+# Unir tablas con `left_join()`
+
+**5.1** Une `diversidad` con `sitios` usando `sitio_id`. Guarda el resultado como `div_sitios` y ordénalo de mayor a menor diversidad.
+
+```{r}
+# Tu código aquí
+
+```
+
+**5.2** Con `div_sitios`, calcula por **hábitat** la media y la desviación estándar de `S`, `H` y `J`.
+
+```{r}
+# Tu código aquí
+
+```
+
+✍️ ¿Qué hábitat tiene mayor riqueza? ¿Y mayor diversidad? ¿Coinciden? ¿Por qué podrían no coincidir?
+
+**5.3 Gremios tróficos.** Une `conteos_limpios` con `sitios` y calcula la **abundancia total por hábitat y gremio**. Después, dentro de cada hábitat, calcula el **porcentaje** que representa cada gremio.
+
+```{r}
+# Tu código aquí
+
+```
+
+✍️ ¿Qué gremio domina en el pastizal? ¿Y en el bosque conservado? ¿Qué gremios casi desaparecen al transformarse el bosque?
+
+---
+
+# Reestructurar tablas con `tidyr`
+
+**6.1 Matriz de comunidad.** Muchos análisis de ecología de comunidades (p. ej. el paquete `vegan`) requieren una **matriz sitio × especie**: un renglón por sitio, una columna por especie y la abundancia total en las celdas. Constrúyela con `pivot_wider()`. Las especies que no se registraron en un sitio deben tener **0**, no `NA` (pista: argumento `values_fill`).
+
+```{r}
+# Tu código aquí
+
+```
+
+**6.2** Exporta la matriz a `../data/matriz_comunidad.csv` con `write_csv()`.
+
+```{r}
+# Tu código aquí
+
+```
+
+**6.3** Regresa la matriz a formato largo con `pivot_longer()` (columnas `especie` y `abund`) y cuenta **cuántas especies tienen abundancia 0** en cada hábitat (tendrás que unir con `sitios`). Estas son especies *ausentes*.
+
+```{r}
+# Tu código aquí
+
+```
+
+**6.4 Clima.** La tabla `clima_wide` tiene un formato poco práctico. Transfórmala a formato largo con las columnas `sitio_id`, `mes` y `precip_mm`. La columna `mes` debe ser un **número** (pista: `names_prefix = "mes_"` y luego `mutate(mes = as.numeric(mes))`).
+
+```{r}
+# Tu código aquí
+
+```
+
+**6.5** Une `por_visita` (ejercicio 4.3) con `clima_long` usando **dos** columnas clave: `sitio_id` y `mes`. Después únelo también con `sitios` para tener el hábitat. Guarda el resultado como `visitas_clima`.
+
+```{r}
+# Tu código aquí
+
+```
+
+---
+
+# Visualización
+
+**7.1** Haz un **boxplot** de la riqueza por visita (`riqueza`) según el hábitat, usando `visitas_clima`. Colorea por hábitat y usa `theme_classic()`.
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**7.2** Repite la figura anterior pero separando por **temporada** (pista: `fill = temporada` o `facet_wrap(~ temporada)`).
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**7.3** Grafica la **composición de gremios** por hábitat con una gráfica de barras apiladas al 100% usando `gremios_habitat` (pista: `geom_col(position = "fill")`).
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**7.4** Haz un diagrama de dispersión de la **diversidad de Shannon (H)** contra la **cobertura de dosel** usando `div_sitios`. Colorea los puntos por hábitat y agrega una línea de tendencia (`geom_smooth(method = "lm")`).
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**7.5** Haz un diagrama de dispersión de la **abundancia total por visita** contra la **precipitación del mes**, con un color por hábitat.
+
+```{r}
+# Tu código aquí
+
+```
+
+
+**7.6 (Opcional)** Compara la riqueza por visita entre hábitats con `ggbetweenstats()` del paquete `ggstatsplot`, o haz una versión interactiva de la figura 7.1 con `plotly`.
+
+```{r}
+# Tu código aquí
+
+```
+
+---
+
+# Interpretación final
+
+✍️ Con base en tus resultados, contesta en un párrafo cada pregunta:
+
+1. ¿Cómo cambian la **riqueza** y la **diversidad** de aves a lo largo del gradiente bosque conservado → bosque secundario → pastizal?
+2. ¿La **composición** de la comunidad (qué especies y qué gremios) es la misma en los tres hábitats? Menciona al menos dos especies indicadoras de cada extremo del gradiente.
+3. ¿Qué efecto tiene la **temporada / precipitación** sobre la comunidad? Menciona el caso de la especie migratoria.
+4. Si fueras a proponer medidas de conservación para la región, ¿qué recomendarías con base en estos datos?
+5. **Reflexión metodológica:** ¿Qué decisión tomaste con los registros sin abundancia? ¿Cómo podría afectar tus conclusiones? ¿Qué otras fuentes de sesgo existen en un conteo por punto (p. ej. observador, hora)?
+
+---
+
+## Rúbrica sugerida
+
+| Sección | Puntos |
+|---|---|
+| 1. Carga y exploración | 5 |
+| 2. `select()`, `filter()`, `arrange()`, `slice()` | 15 |
+| 3. `mutate()` e `ifelse()` | 10 |
+| 4. `count()`, `group_by()`, `summarize()` (incluye Shannon) | 20 |
+| 5. `left_join()` | 15 |
+| 6. `pivot_wider()`, `pivot_longer()`, `write_csv()` | 15 |
+| 7. Visualización | 10 |
+| 8. Interpretación ecológica | 10 |
+| **Total** | **100** |
