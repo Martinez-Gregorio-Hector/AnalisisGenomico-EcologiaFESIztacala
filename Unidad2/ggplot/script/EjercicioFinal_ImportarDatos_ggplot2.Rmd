@@ -1,0 +1,262 @@
+---
+title: "Ejercicio Final: Importación de Datos y Visualización con ggplot2"
+subtitle: "Fototrampeo de mamíferos a lo largo de un gradiente altitudinal"
+output:
+  html_document: default
+  pdf_document: default
+date: "2026-09-21"
+---
+
+# Contexto del estudio
+
+Un equipo de investigación instaló **8 cámaras trampa** a lo largo de un gradiente altitudinal (de 1200 a 3150 msnm), desde selva baja hasta bosque nublado, durante todo el año 2024. Cada vez que un mamífero activaba una cámara se registró: sitio, fecha, hora, especie, número de individuos y peso promedio estimado.
+
+Además, para cada sitio se tiene una tabla de **metadatos ambientales**: elevación, tipo de hábitat y distancia al cuerpo de agua más cercano.
+
+Tu tarea es **importar ambos archivos**, combinarlos y responder preguntas ecológicas reales (¿qué especies prefieren qué hábitats? ¿hay estacionalidad en la actividad? ¿la riqueza cambia con la elevación? ¿qué especies son nocturnas?) usando `ggplot2`.
+
+Los archivos de datos se encuentran en la carpeta `data/`:
+
+* `data/registros_camaras.csv` — registros de fototrampeo (formato CSV, separado por comas)
+* `data/sitios_metadata.txt` — metadatos de los sitios (formato TXT, separado por tabulador)
+
+---
+
+# Parte 1. Importación de datos
+
+## 1.1 Verifica tu directorio de trabajo
+
+Antes de importar cualquier archivo, es indispensable saber en qué directorio estamos parados, ya que las rutas relativas dependen de esto.
+
+```{r}
+getwd()
+# Si es necesario, ajusta tu directorio de trabajo con setwd() o abre este
+# archivo .Rmd desde el proyecto de RStudio (.Rproj) para que las rutas
+# relativas "data/..." funcionen correctamente.
+```
+
+## 1.2 Importar el archivo CSV
+
+```{r}
+registros <- read.csv("../data/registros_camaras.csv", stringsAsFactors = FALSE)
+head(registros)
+str(registros)
+dim(registros)
+```
+
+**Preguntas**
+
+1. ¿Cuántos registros (filas) y cuántas variables (columnas) tiene el data frame `registros`?
+2. ¿Qué clase de dato tiene cada columna? ¿La columna `fecha` se importó como texto o como fecha? (usa `class(registros$fecha)`)
+3. ¿Qué parámetro de `read.csv()` usarías si el archivo tuviera un separador de punto y coma (`;`) en lugar de coma? *(Pista: revisa `?read.csv2`)*
+
+## 1.3 Importar el archivo TXT (separado por tabulador)
+
+```{r}
+sitios <- read.table("../data/sitios_metadata.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+sitios
+str(sitios)
+```
+
+**Preguntas**
+
+1. ¿Qué función alternativa a `read.table(..., sep = "\t")` podrías usar directamente para leer un archivo separado por tabuladores?
+2. ¿Qué pasaría si olvidas el argumento `header = TRUE`? Pruébalo y observa cómo cambian los nombres de columna.
+
+## 1.4 (Opcional) Importar desde Excel
+
+Si tus propios datos de campo están en un archivo `.xlsx`, R no puede leerlos con funciones base; se necesita el paquete `readxl`.
+
+```{r, eval=FALSE}
+# install.packages("readxl")
+library(readxl)
+# registros_excel <- read_excel("data/registros_camaras.xlsx", sheet = 1)
+```
+
+**Pregunta**
+
+1. ¿Por qué crees que es más común compartir bases de datos científicas en formato `.csv` en lugar de `.xlsx`?
+
+## 1.5 Combinar (unir) ambas tablas
+
+Los registros de fototrampeo no tienen información de hábitat ni elevación; esa información vive en la tabla `sitios`. Para poder graficar, por ejemplo, la actividad por hábitat, necesitamos **unir** ambas tablas usando la columna en común: `sitio`.
+
+```{r}
+datos <- merge(registros, sitios, by = "sitio")
+head(datos)
+dim(datos)
+```
+
+**Preguntas**
+
+1. ¿Por qué el número de filas de `datos` es igual al de `registros` y no al de `sitios`?
+2. ¿Qué columnas nuevas se agregaron a `datos` que no estaban en `registros`?
+
+## 1.6 Preparación de variables
+
+Antes de graficar conviene convertir la fecha a formato `Date` y extraer el mes, y declarar las variables categóricas como factores.
+
+```{r}
+datos$fecha <- as.Date(datos$fecha, format = "%Y-%m-%d")
+datos$mes <- format(datos$fecha, "%m")
+datos$especie <- factor(datos$especie)
+datos$habitat <- factor(datos$habitat,
+                         levels = c("Selva_baja", "Bosque_mixto",
+                                    "Bosque_pino_encino", "Bosque_nublado"))
+str(datos)
+```
+
+---
+
+# Parte 2. Visualización con ggplot2
+
+## Ejercicio 2.1 — ¿Qué especies se registraron más?
+
+```{r}
+library(ggplot2)
+
+ggplot(data = datos, aes(x = especie)) +
+  geom_bar(fill = "seagreen") +
+  labs(title = "Número de registros por especie",
+       x = "Especie", y = "Número de registros") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, face = "italic"))
+```
+
+**Tareas**
+
+1. Ordena las barras de mayor a menor usando `reorder()` dentro de `aes()` (revisa cómo lo hiciste en el trabajo anterior de vectores/mariposas).
+2. En lugar de contar registros, agrupa y suma la columna `n_individuos` por especie para obtener la **abundancia total** observada (pista: usa `aggregate(n_individuos ~ especie, data = datos, FUN = sum)` y grafica ese resultado con `geom_bar(stat = "identity")`).
+3. ¿Coincide la especie con más registros con la especie con más individuos totales? ¿Por qué podría no coincidir? *(Pista: piensa en especies gregarias como `Pecari_tajacu`.)*
+
+## Ejercicio 2.2 — Uso de hábitat por especie
+
+```{r, fig.height=6}
+ggplot(data = datos, aes(x = habitat, fill = especie)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Registros por hábitat y especie",
+       x = "Tipo de hábitat", y = "Número de registros", fill = "Especie") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))
+```
+
+**Preguntas**
+
+1. ¿Qué especies parecen estar restringidas a un solo tipo de hábitat y cuáles se observan en varios?
+2. Cambia `position = "dodge"` por `position = "fill"`. ¿Cómo cambia la interpretación del gráfico? (Pista: ahora se muestran proporciones, no conteos absolutos.)
+3. Usa `facet_wrap(~ especie)` en lugar de `fill = especie` para tener un panel por especie. ¿Qué versión te parece más clara para comparar el uso de hábitat entre especies?
+
+## Ejercicio 2.3 — Riqueza de especies a lo largo del gradiente altitudinal
+
+Primero calculemos la riqueza de especies (número de especies distintas) registrada en cada sitio:
+
+```{r}
+riqueza_sitio <- aggregate(especie ~ sitio + elevacion_m + habitat,
+                            data = datos,
+                            FUN = function(x) length(unique(x)))
+names(riqueza_sitio)[names(riqueza_sitio) == "especie"] <- "riqueza"
+riqueza_sitio
+```
+
+```{r}
+ggplot(data = riqueza_sitio, aes(x = elevacion_m, y = riqueza, colour = habitat)) +
+  geom_point(size = 4) +
+  geom_smooth(aes(group = 1), method = "lm", colour = "black", se = TRUE, linetype = "dashed") +
+  labs(title = "Riqueza de especies de mamíferos vs. elevación",
+       x = "Elevación (m)", y = "Número de especies", colour = "Hábitat") +
+  theme_bw()
+```
+
+**Preguntas**
+
+1. ¿La riqueza de especies aumenta, disminuye o no muestra una tendencia clara con la elevación en este gradiente?
+2. Este patrón, ¿coincide con lo que sabes sobre gradientes altitudinales y diversidad (por ejemplo, patrones de riqueza monotónicos vs. "joroba media" — *mid-domain effect*)?
+3. Agrega `geom_text(aes(label = sitio), vjust = -1, show.legend = FALSE)` para etiquetar cada punto con el nombre del sitio.
+
+## Ejercicio 2.4 — Patrones de actividad diaria (¿quién es nocturno?)
+
+Convirtamos la hora de cada registro a un valor numérico (hora decimal) para graficar la actividad a lo largo del día.
+
+```{r}
+datos$hora_decimal <- as.numeric(substr(datos$hora, 1, 2)) +
+                       as.numeric(substr(datos$hora, 4, 5)) / 60
+
+ggplot(data = datos, aes(x = hora_decimal, fill = especie)) +
+  geom_density(alpha = 0.4) +
+  scale_x_continuous(breaks = seq(0, 24, 4), limits = c(0, 24)) +
+  labs(title = "Patrones de actividad diaria por especie",
+       x = "Hora del día", y = "Densidad de registros") +
+  theme_minimal()
+```
+
+**Preguntas**
+
+1. Usa `facet_wrap(~ especie)` para separar cada especie en su propio panel. ¿Qué especies muestran actividad claramente nocturna (picos cerca de las 0 o 24 h) y cuáles diurna?
+2. ¿Hay especies con dos picos de actividad (patrón crepuscular, cerca del amanecer y del atardecer)? Este patrón se llama actividad **catemoral** o bimodal en ecología del comportamiento.
+3. ¿Coincide lo que observas con el conocimiento previo que tengas sobre la biología de alguna de estas especies (por ejemplo, *Puma concolor* o *Dasypus novemcinctus*)?
+
+## Ejercicio 2.5 — Estacionalidad: ¿hay más actividad en temporada de lluvias?
+
+```{r}
+datos$mes <- factor(datos$mes, levels = sprintf("%02d", 1:12))
+
+ggplot(data = datos, aes(x = mes)) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Número de registros de fototrampeo por mes (2024)",
+       x = "Mes", y = "Número de registros") +
+  theme_bw()
+```
+
+**Preguntas**
+
+1. Con base en el gráfico, ¿en qué meses hay más actividad registrada? En México, la temporada de lluvias típicamente ocurre entre junio y octubre. ¿El patrón observado es consistente con un aumento de actividad de fauna en temporada de lluvias?
+2. Repite el gráfico pero separando por `especie` con `facet_wrap(~ especie, scales = "free_y")`. ¿Todas las especies muestran el mismo patrón estacional?
+
+## Ejercicio 2.6 — Peso corporal y comportamiento: boxplot comparativo
+
+```{r}
+ggplot(data = datos, aes(x = reorder(especie, peso_prom_kg, FUN = median),
+                          y = peso_prom_kg, fill = habitat)) +
+  geom_boxplot() +
+  labs(title = "Peso corporal estimado por especie",
+       x = "Especie", y = "Peso (kg)", fill = "Hábitat") +
+  coord_flip() +
+  theme_bw()
+```
+
+**Preguntas**
+
+1. ¿Por qué en este ejercicio se usó `coord_flip()`? ¿Mejora la legibilidad de las etiquetas de especie?
+2. ¿Qué especie muestra mayor variabilidad (caja más ancha) en el peso registrado? ¿A qué podría deberse esa variación (error de estimación desde la cámara, dimorfismo sexual, individuos juveniles y adultos mezclados)?
+
+## Ejercicio 2.7 — Guardar tu gráfico favorito
+
+Elige el gráfico que te parezca más interesante de todo el ejercicio y expórtalo en alta resolución, como lo harías para un informe técnico o una presentación de resultados.
+
+```{r, eval=FALSE}
+mi_grafico_final <- ggplot(data = riqueza_sitio, aes(x = elevacion_m, y = riqueza, colour = habitat)) +
+  geom_point(size = 4) +
+  geom_smooth(aes(group = 1), method = "lm", colour = "black", se = TRUE, linetype = "dashed") +
+  labs(title = "Riqueza de especies de mamíferos vs. elevación",
+       x = "Elevación (m)", y = "Número de especies", colour = "Hábitat") +
+  theme_bw()
+
+ggsave("../plot/riqueza_vs_elevacion.png", plot = mi_grafico_final,
+       width = 8, height = 6, dpi = 300)
+```
+
+---
+
+# Parte 3. Reto integrador
+
+Con la tabla combinada `datos` (o volviendo a importar y combinar los archivos desde cero), responde:
+
+1. **Importación desde cero**: escribe el código completo, en un solo bloque, que importe `registros_camaras.csv` y `sitios_metadata.txt`, los combine con `merge()`, y prepare las variables `fecha`, `mes`, `especie` y `habitat` como se hizo en la Parte 1.
+2. **Pregunta ecológica propia**: plantea una pregunta que no se haya explorado en los ejercicios anteriores (por ejemplo: ¿la distancia al agua influye en la abundancia de alguna especie en particular? ¿el tamaño de grupo de *Pecari_tajacu* cambia entre hábitats?).
+3. **Análisis y visualización**: usa `aggregate()` para resumir los datos según tu pregunta y construye **al menos un gráfico de ggplot2** (con título, ejes en español y un tema) que ayude a responderla.
+4. **Interpretación**: escribe un párrafo breve interpretando el resultado desde una perspectiva ecológica, y menciona una limitación de estos datos simulados frente a un estudio real de fototrampeo (por ejemplo, pseudoreplicación, esfuerzo de muestreo desigual entre cámaras, tasas de detección imperfectas).
+
+```{r}
+# Espacio para tu reto integrador
+
+```
