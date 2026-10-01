@@ -1,0 +1,773 @@
+---
+title: "Pruebas de hipótesis, ANOVA, regresión, funciones y loops en R"
+subtitle: "Basado en *YaRrr! The Pirate's Guide to R* (N. D. Phillips), capítulos 13–17"
+author: "Curso de Estadística"
+---
+Esta parte del curso se sacó de: https://nathanieldphillips-yarrr.share.connect.posit.cloud/
+
+
+En esta clase cubriremos cinco temas que forman el núcleo del análisis de datos en R
+
+
+| 13 | Pruebas de hipótesis | `t.test()`, `cor.test()`, `chisq.test()`, `apa()` |
+| 14 | ANOVA | `aov()`, `TukeyHSD()`, `summary()` |
+| 15 | Regresión | `lm()`, `glm()`, `predict()`, `anova()` |
+| 16 | Funciones propias | `function()`, `return()`, `stop()`, `if()` |
+| 17 | Loops | `for()`, `vector()`, `seq_along()` |
+
+Usaremos el paquete `yarrr`, que contiene las bases de datos `pirates`, `poopdeck` y `diamonds`.
+
+```{r paquetes}
+# install.packages("yarrr")   # solo la primera vez
+library(yarrr)
+
+str(pirates)
+head(pirates)
+```
+
+---
+Capítulo 13: Pruebas de hipótesis
+
+# Idea general
+
+Una prueba de hipótesis compara dos explicaciones sobre los datos:
+
+- **Hipótesis nula ($H_0$):** no hay efecto / no hay diferencia / no hay relación.
+- **Hipótesis alternativa ($H_1$):** sí existe un efecto, diferencia o relación.
+
+Toda prueba sigue la misma lógica:
+
+1. **Estadísticos descriptivos:** medias, desviaciones, proporciones… (describen *la muestra*).
+2. **Estadístico de prueba:** resume qué tan lejos están los datos de lo que esperaríamos bajo $H_0$ (p. ej., $t$, $r$, $\chi^2$).
+3. **Valor p:** probabilidad de observar un estadístico *igual o más extremo* que el nuestro **si $H_0$ fuera verdadera**.
+
+> Si $p < \alpha$ (usualmente 0.05) rechazamos $H_0$. **Ojo:** el valor p *no* es la probabilidad de que $H_0$ sea cierta, ni mide el tamaño del efecto.
+
+Casi todas las funciones de prueba en R devuelven un objeto `htest`, que es una **lista** con elementos que podemos extraer:
+
+```{r htest-objeto}
+prueba <- t.test(x = pirates$age, 
+                 mu = 30)
+
+names(prueba)
+
+prueba$statistic
+prueba$p.value
+prueba$conf.int
+```
+
+## Prueba t: `t.test()`
+
+### Prueba t de una muestra
+
+¿El número medio de tatuajes de los piratas es distinto de 5?
+
+```{r t-una}
+t.test(x = pirates$tattoos, 
+       mu = 5)
+```
+
+Podemos cambiar la hipótesis alternativa con `alternative = "less"` o `"greater"` (prueba de una cola):
+
+```{r t-una-cola}
+t.test(x = pirates$tattoos, 
+       mu = 9, 
+       alternative = "greater")
+```
+
+### Prueba t de dos muestras
+
+¿Difiere el número de tatuajes entre piratas **con** y **sin** parche en el ojo? Usamos la notación de fórmula `y ~ grupo`:
+
+```{r t-dos}
+t.test(formula = tattoos ~ eyepatch, data = pirates)
+```
+
+Si la variable de agrupación tiene más de dos niveles, usamos `subset` para quedarnos con dos:
+
+```{r t-subset}
+t.test(formula = age ~ sex,
+       data = pirates,
+       subset = sex %in% c("male", "female"))
+```
+
+También podemos pasar dos vectores directamente:
+
+```{r t-vectores}
+edad_ccc  <- pirates$age[pirates$college == "CCCC"]
+edad_jssf <- pirates$age[pirates$college == "JSSFP"]
+t.test(x = edad_ccc, y = edad_jssf)
+```
+
+> Por defecto R usa la **prueba de Welch** (no asume varianzas iguales). Para la versión clásica, `var.equal = TRUE`. Para datos pareados, `paired = TRUE`.
+
+```{r t-plot, echo=FALSE}
+
+t.test(formula = tattoos ~ eyepatch, data = pirates)
+
+pirateplot(formula = tattoos ~ eyepatch, data = pirates,
+           main = "Tatuajes según uso de parche", ylab = "Número de tatuajes",
+           xlab = "Parche (0 = no, 1 = sí)")
+```
+
+## Correlación: `cor.test()`
+
+¿Existe relación entre la **edad** y el **número de tesoros encontrados**?
+
+```{r cor}
+cor.test(formula = ~ age + tchests, data = pirates)
+```
+
+Con `subset` podemos restringir el análisis a un grupo:
+
+```{r cor-subset}
+cor.test(formula = ~ age + tattoos,
+         data = pirates,
+         subset = college == "JSSFP")
+```
+
+Otros métodos: `method = "spearman"` (rangos, no paramétrico) o `method = "kendall"`.
+
+```{r cor-plot, echo=FALSE}
+cor.test(formula = ~ height + age,
+         data = pirates)
+
+plot(height ~ age, data = pirates, pch = 16, col = transparent("steelblue", .6),
+     main = "Altura vs. edad", xlab = "Edad", ylab = "Altura (cm)")
+abline(lm(height ~ age, data = pirates), lwd = 2, col = "firebrick")
+```
+
+## Chi-cuadrado: `chisq.test()`
+
+### Bondad de ajuste (una variable)
+
+¿Están los piratas distribuidos por igual entre las universidades?
+
+```{r chi-una}
+table(pirates$college)
+chisq.test(x = table(pirates$college))
+```
+
+### Independencia (dos variables)
+
+¿El uso de parche depende de la universidad?
+
+```{r chi-dos}
+tabla <- table(pirates$college, pirates$eyepatch)
+tabla
+chisq.test(tabla)
+```
+
+## Conclusiones en estilo APA: `apa()`
+
+El paquete `yarrr` incluye `apa()`, que convierte un objeto `htest` en una frase lista para un reporte:
+
+```{r apa}
+apa(t.test(tattoos ~ eyepatch, data = pirates))
+apa(cor.test(~ age + height, data = pirates))
+apa(chisq.test(table(pirates$college, pirates$eyepatch)))
+```
+
+---
+
+# Capítulo 14: ANOVA
+
+## ¿Por qué ANOVA?
+
+Cuando queremos comparar **más de dos grupos**, hacer muchas pruebas t infla el error tipo I. El **análisis de varianza (ANOVA)** evalúa con una sola prueba si *al menos una* media difiere, comparando:
+
+$$F = \frac{\text{varianza entre grupos}}{\text{varianza dentro de los grupos}}$$
+
+Un $F$ grande (y $p$ pequeño) indica que las diferencias entre grupos son mayores que lo esperado por azar.
+
+Flujo de trabajo típico:
+
+1. Ajustar el modelo con `aov()` (o `lm()`).
+2. Ver la tabla ANOVA con `summary()`.
+3. Si es significativo, hacer comparaciones post hoc con `TukeyHSD()`.
+4. (Opcional) Ver coeficientes con `summary.lm()`.
+
+Usaremos `poopdeck`: tiempo (minutos) que tardan distintos limpiadores (`cleaner`) en limpiar distintos tipos de suciedad (`type`).
+
+```{r poopdeck}
+str(poopdeck)
+head(poopdeck)
+```
+
+## ANOVA de una vía
+
+¿Difiere el tiempo de limpieza entre limpiadores?
+
+```{r anova1-plot, echo=FALSE}
+pirateplot(time ~ cleaner, data = poopdeck, main = "Tiempo de limpieza por limpiador",
+           ylab = "Tiempo (min)", xlab = "Limpiador")
+```
+
+```{r anova1}
+# 1. Ajustar
+mod_1 <- aov(formula = time ~ cleaner, data = poopdeck)
+
+# 2. Tabla ANOVA
+summary(mod_1)
+```
+
+```{r tukey}
+# 3. Post hoc: ¿qué pares difieren?
+TukeyHSD(mod_1)
+```
+
+```{r anova1-lm}
+# 4. Coeficientes (el primer nivel es la referencia / intercepto)
+summary.lm(mod_1)
+```
+
+## ANOVA de varias vías
+
+Con dos factores simplemente los sumamos en la fórmula:
+
+```{r anova2}
+mod_2 <- aov(time ~ cleaner + type, data = poopdeck)
+summary(mod_2)
+TukeyHSD(mod_2)
+```
+
+## Interacciones
+
+Una **interacción** existe cuando el efecto de un factor depende del nivel del otro (p. ej., un limpiador funciona bien en un tipo de suciedad pero mal en otro). Se escribe `A * B` (= `A + B + A:B`).
+
+```{r anova-int}
+mod_3 <- aov(time ~ cleaner * type, data = poopdeck)
+summary(mod_3)
+```
+
+```{r int-plot, echo=FALSE}
+pirateplot(time ~ cleaner + type, data = poopdeck,
+           main = "Interacción limpiador × tipo de suciedad", ylab = "Tiempo (min)")
+```
+
+```{r int-lm}
+summary.lm(mod_3)
+```
+
+## Tipos de sumas de cuadrados
+
+`summary(aov())` usa sumas de cuadrados **Tipo I** (secuenciales): el orden de los factores importa si el diseño **no está balanceado**. Para diseños desbalanceados suele preferirse Tipo II o III con `car::Anova()`:
+
+```{r anova-car, eval=FALSE}
+# install.packages("car")
+car::Anova(mod_3, type = 2)
+```
+
+## ANOVA de medidas repetidas (nota)
+
+Si los mismos sujetos se miden varias veces, las observaciones no son independientes. Una opción es incluir un término de error: `aov(y ~ tratamiento + Error(sujeto / tratamiento))`. Para modelos más flexibles se usan **modelos mixtos** (`lme4::lmer`).
+
+---
+
+# Capítulo 15: Regresión
+
+## Regresión lineal: `lm()`
+
+La regresión modela una variable respuesta **continua** como combinación lineal de predictores:
+
+$$y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \dots + \varepsilon_i$$
+
+Usaremos `diamonds` (del paquete `yarrr`): valor de diamantes según su peso, claridad y color.
+
+```{r diamonds}
+str(diamonds)
+head(diamonds)
+
+```
+
+```{r lm1}
+diamonds_lm <- lm(formula = value ~ weight + clarity + color, data = diamonds)
+summary(diamonds_lm)
+```
+
+**Cómo leer la salida:**
+
+- `Estimate`: cambio esperado en `value` por cada unidad de aumento del predictor (manteniendo los demás constantes).
+- `Pr(>|t|)`: valor p de cada coeficiente ($H_0: \beta = 0$).
+- `R-squared`: proporción de la varianza de $y$ explicada por el modelo.
+- `F-statistic`: prueba global del modelo.
+
+Extraer componentes del modelo:
+
+```{r lm-partes}
+coef(diamonds_lm)                         # coeficientes
+summary(diamonds_lm)$coefficients         # tabla completa
+summary(diamonds_lm)$r.squared            # R²
+head(fitted(diamonds_lm))                 # valores ajustados
+head(residuals(diamonds_lm))              # residuos
+```
+
+Usar todas las columnas como predictores con el punto `.`:
+
+```{r lm-punto}
+lm(value ~ ., data = diamonds)
+```
+
+## Predicción: `predict()`
+
+```{r predict}
+nuevos <- data.frame(weight  = c(12, 6, 5),
+                     clarity = c(1.3, 1, 1.5),
+                     color   = c(5, 2, 3))
+predict(object = diamonds_lm, newdata = nuevos)
+```
+
+Visualizar valores observados vs. ajustados:
+
+```{r pred-plot, echo=FALSE}
+plot(x = diamonds$value, y = fitted(diamonds_lm), pch = 16,
+     col = transparent("steelblue", .4), xlab = "Valor observado",
+     ylab = "Valor ajustado", main = "Observado vs. ajustado")
+abline(0, 1, lty = 2)
+```
+
+## Diagnóstico del modelo
+
+```{r diag, fig.height=6}
+par(mfrow = c(2, 2))
+plot(diamonds_lm)
+par(mfrow = c(1, 1))
+```
+
+Revisamos: linealidad y homocedasticidad (residuos vs. ajustados), normalidad de residuos (Q-Q) y observaciones influyentes (leverage).
+
+## Interacciones y centrado
+
+```{r lm-int}
+diamonds_int <- lm(value ~ weight * clarity, data = diamonds)
+summary(diamonds_int)$coefficients
+```
+
+Con interacciones, los efectos principales se interpretan cuando el otro predictor vale 0. **Centrar** los predictores (restar la media) hace esa interpretación más significativa:
+
+```{r centrar}
+diamonds$weight_c  <- diamonds$weight  - mean(diamonds$weight)
+diamonds$clarity_c <- diamonds$clarity - mean(diamonds$clarity)
+summary(lm(value ~ weight_c * clarity_c, data = diamonds))$coefficients
+```
+
+## Comparar modelos: `anova()`
+
+¿Mejora significativamente un modelo más complejo?
+
+```{r comparar}
+mod_a <- lm(value ~ weight, data = diamonds)
+mod_b <- lm(value ~ weight + clarity, data = diamonds)
+mod_c <- lm(value ~ weight + clarity + color, data = diamonds)
+anova(mod_a, mod_b, mod_c)
+AIC(mod_a, mod_b, mod_c)
+```
+
+## Modelos lineales generalizados: `glm()`
+
+Cuando la respuesta **no es normal**, usamos `glm()` con una familia adecuada:
+
+| Respuesta | Familia | Ejemplo |
+|:--|:--|:--|
+| Binaria (0/1) | `binomial` | presencia/ausencia |
+| Conteos | `poisson` | número de individuos |
+| Continua positiva | `Gamma` | biomasa |
+
+### Regresión logística
+
+¿Qué predice que un diamante sea "valioso" (valor > 190)?
+
+```{r glm}
+diamonds$valioso <- diamonds$value > 190
+
+mod_log <- glm(valioso ~ weight + clarity + color,
+               data = diamonds, family = binomial)
+summary(mod_log)
+```
+
+Los coeficientes están en escala **log-odds**. Para obtener probabilidades usamos `type = "response"`:
+
+```{r glm-pred}
+predict(mod_log, newdata = nuevos, type = "response")
+```
+
+---
+
+# Capítulo 16: Funciones propias
+
+## ¿Por qué escribir funciones?
+
+Si copias y pegas el mismo código más de dos veces, conviene convertirlo en una función: el código se vuelve más corto, legible y menos propenso a errores.
+
+## Estructura
+
+```{r estructura, eval=FALSE}
+NOMBRE <- function(ARGUMENTOS) {
+  ACCIONES
+  return(SALIDA)
+}
+```
+
+```{r f-simple}
+cuadrado <- function(x) {
+  resultado <- x ^ 2
+  return(resultado)
+}
+
+cuadrado(4)
+cuadrado(1:5)
+```
+
+## Argumentos con valores por defecto
+
+```{r f-default}
+oh_no <- function(nombre = "Jack", veces = 3) {
+  paste0("¡Oh no, ", nombre, "!", strrep("!", veces))
+}
+
+oh_no()
+oh_no(nombre = "Anne Bonny", veces = 6)
+```
+
+## Condicionales dentro de funciones: `if`, `else`, `stop()`
+
+```{r f-if}
+error_estandar <- function(x, na.rm = TRUE) {
+  if (!is.numeric(x)) stop("x debe ser numérico")
+  if (na.rm) x <- x[!is.na(x)]
+  sd(x) / sqrt(length(x))
+}
+
+error_estandar(pirates$age)
+# error_estandar(pirates$sex)   # daría error
+```
+
+## Devolver varios resultados con una lista
+
+```{r f-lista}
+describir <- function(x) {
+  list(n      = length(x),
+       media  = mean(x),
+       sd     = sd(x),
+       ee     = error_estandar(x),
+       ic95   = mean(x) + c(-1, 1) * 1.96 * error_estandar(x))
+}
+
+describir(pirates$tattoos)
+```
+
+## Funciones que generan gráficas
+
+```{r f-plot}
+histograma_bonito <- function(x, titulo = "", color = "steelblue") {
+  hist(x, main = titulo, col = transparent(color, .5), border = "white",
+       xlab = "", yaxt = "n", ylab = "")
+  abline(v = mean(x), lwd = 2, lty = 2)
+  mtext(paste0("Media = ", round(mean(x), 2), "; SD = ", round(sd(x), 2)),
+        side = 3)
+}
+
+histograma_bonito(pirates$height, titulo = "Altura de los piratas")
+```
+
+## Consejos
+
+- Usa nombres descriptivos y verbos (`calcular_diversidad`, no `f1`).
+- Prueba la función con casos sencillos cuyo resultado conoces.
+- Las variables creadas **dentro** de una función son locales: no existen fuera de ella.
+- Guarda tus funciones en un script (`funciones.R`) y cárgalas con `source("funciones.R")`.
+
+---
+
+# Capítulo 17: Loops
+
+## El loop `for`
+
+Un loop repite un bloque de código para cada valor de un **índice**:
+
+```{r loop-estructura, eval=FALSE}
+for (i in VALORES) {
+  ACCIONES
+}
+```
+
+```{r loop-simple}
+for (i in 1:5) {
+  print(paste("Iteración", i))
+}
+```
+
+## Guardar resultados: pre-asignar un contenedor
+
+Siempre crea el objeto donde guardarás los resultados **antes** del loop:
+
+```{r loop-guardar}
+n <- 10
+cuadrados <- vector("numeric", length = n)   # contenedor vacío
+
+for (i in 1:n) {
+  cuadrados[i] <- i ^ 2
+}
+cuadrados
+```
+
+## Recorrer grupos
+
+Calcular la media de tatuajes por universidad:
+
+```{r loop-grupos}
+universidades <- unique(pirates$college)
+media_tat <- vector("numeric", length = length(universidades))
+
+for (i in seq_along(universidades)) {
+  datos_i <- subset(pirates, college == universidades[i])
+  media_tat[i] <- mean(datos_i$tattoos)
+}
+
+data.frame(college = universidades, media_tatuajes = media_tat)
+```
+
+> Equivalente vectorizado: `aggregate(tattoos ~ college, data = pirates, FUN = mean)`. Si existe una función vectorizada, suele ser más rápida y concisa; los loops son ideales para simulaciones, procesos iterativos o tareas complejas por grupo.
+
+## Loops para gráficas múltiples
+
+```{r loop-plots, fig.height=6}
+par(mfrow = c(2, 2))
+vars <- c("age", "height", "weight", "tattoos")
+for (v in vars) {
+  histograma_bonito(pirates[[v]], titulo = v)
+}
+par(mfrow = c(1, 1))
+```
+
+## Simulaciones: el poder real de los loops
+
+¿Cuál es la probabilidad de detectar una diferencia real (poder estadístico) con $n = 20$ por grupo y una diferencia de medias de 0.5 SD?
+
+```{r loop-sim}
+set.seed(123)
+n_sim  <- 1000
+p_vals <- vector("numeric", length = n_sim)
+
+for (i in 1:n_sim) {
+  grupo_a <- rnorm(20, mean = 0,   sd = 1)
+  grupo_b <- rnorm(20, mean = 0.5, sd = 1)
+  p_vals[i] <- t.test(grupo_a, grupo_b)$p.value
+}
+
+mean(p_vals < 0.05)   # poder estimado
+```
+
+## Bootstrap con un loop
+
+Intervalo de confianza de la mediana de la edad mediante remuestreo:
+
+```{r bootstrap}
+set.seed(42)
+B <- 2000
+medianas <- vector("numeric", length = B)
+
+for (b in 1:B) {
+  muestra_b   <- sample(pirates$age, replace = TRUE)
+  medianas[b] <- median(muestra_b)
+}
+
+quantile(medianas, c(0.025, 0.975))
+```
+
+## Loops anidados (nota breve)
+
+```{r loop-anidado}
+tabla_mult <- matrix(NA, nrow = 3, ncol = 3)
+for (fila in 1:3) {
+  for (col in 1:3) {
+    tabla_mult[fila, col] <- fila * col
+  }
+}
+tabla_mult
+```
+
+---
+
+# Ejercicio integrador para ecólogos
+
+## Contexto
+
+Un equipo de ecólogos muestreó **60 parcelas** de 20 × 20 m en un gradiente altitudinal, distribuidas en **tres tipos de hábitat**: *bosque conservado*, *bosque secundario* y *pastizal*. En cada parcela registraron:
+
+- `habitat`: tipo de hábitat (factor de 3 niveles).
+- `altitud`: altitud en m s.n.m.
+- `cobertura`: porcentaje de cobertura del dosel.
+- `perturbacion`: presencia de ganado (`"si"` / `"no"`).
+- `sp1`, …, `sp8`: abundancia (número de individuos) de 8 especies de escarabajos coprófagos.
+- `sp_indicadora`: presencia (1) / ausencia (0) de una especie indicadora de bosque.
+
+Ejecuta el siguiente bloque para generar los datos (**no lo modifiques**, para que todos tengan los mismos datos):
+
+```{r datos-ejercicio}
+set.seed(2026)
+n <- 60
+habitat  <- factor(rep(c("conservado", "secundario", "pastizal"), each = 20),
+                   levels = c("conservado", "secundario", "pastizal"))
+altitud  <- round(runif(n, 800, 2200))
+cobertura <- round(pmin(100, pmax(0,
+               c(conservado = 85, secundario = 55, pastizal = 10)[habitat] +
+               rnorm(n, 0, 10))))
+perturbacion <- ifelse(runif(n) < c(conservado = .15, secundario = .45,
+                                    pastizal = .85)[habitat], "si", "no")
+
+# Abundancias: algunas especies responden al hábitat y a la altitud
+lambda_base <- c(conservado = 12, secundario = 8, pastizal = 4)[habitat]
+abund <- sapply(1:8, function(j) {
+  efecto_alt <- exp(-0.0006 * (altitud - 1000) * (j %% 3))
+  rpois(n, lambda_base * efecto_alt * runif(1, 0.3, 1.2))
+})
+colnames(abund) <- paste0("sp", 1:8)
+
+prob_ind <- plogis(-4 + 0.06 * cobertura - 0.001 * (altitud - 1500))
+sp_indicadora <- rbinom(n, 1, prob_ind)
+
+escarabajos <- data.frame(parcela = 1:n, habitat, altitud, cobertura,
+                          perturbacion, abund, sp_indicadora)
+head(escarabajos)
+```
+
+## Instrucciones
+
+### Parte A — Funciones (Cap. 16)
+
+1. Escribe una función `shannon(x)` que reciba un vector de abundancias y devuelva el índice de diversidad de Shannon:
+   $$H' = -\sum_{i=1}^{S} p_i \ln p_i, \quad p_i = \frac{n_i}{N}$$
+   La función debe **ignorar las especies con abundancia 0** y lanzar un error con `stop()` si `x` contiene valores negativos.
+2. Escribe una función `riqueza(x)` que devuelva el número de especies con abundancia > 0.
+
+### Parte B — Loops (Cap. 17)
+
+3. Usando un loop `for`, calcula para **cada parcela** la riqueza, la abundancia total y el índice de Shannon. Guarda los resultados en tres columnas nuevas de `escarabajos`: `S`, `N` y `H`.
+
+### Parte C — Pruebas de hipótesis (Cap. 13)
+
+4. **Prueba t:** ¿Difiere la diversidad (`H`) entre parcelas con y sin ganado (`perturbacion`)? Reporta el resultado con `apa()`.
+5. **Correlación:** ¿Existe relación entre la cobertura del dosel y la riqueza (`S`)? Usa Pearson y Spearman; ¿llegan a la misma conclusión?
+6. **Chi-cuadrado:** ¿La presencia de la especie indicadora es independiente del tipo de hábitat?
+
+### Parte D — ANOVA (Cap. 14)
+
+7. ¿Difiere la diversidad `H` entre los tres hábitats? Ajusta un ANOVA de una vía, grafica con `pirateplot()` y, si procede, aplica `TukeyHSD()`. ¿Qué pares de hábitats difieren?
+8. Ajusta un ANOVA de dos vías `H ~ habitat * perturbacion`. ¿Hay interacción? Interpreta ecológicamente.
+
+### Parte E — Regresión (Cap. 15)
+
+9. Ajusta un modelo lineal `H ~ altitud + cobertura`. Interpreta los coeficientes y el $R^2$. Revisa los gráficos de diagnóstico.
+10. Como la abundancia total `N` es un **conteo**, ajusta un GLM Poisson `N ~ habitat + altitud`. ¿Qué efecto tiene la altitud?
+11. Ajusta una **regresión logística** para la presencia de la especie indicadora en función de `cobertura` y `altitud`. Predice la probabilidad de presencia en una parcela a 1500 m con 20 %, 50 % y 90 % de cobertura.
+
+### Parte F — Integración con simulación (Caps. 16 y 17)
+
+12. Escribe una función `boot_diferencia(datos, grupo1, grupo2, B = 1000)` que, mediante un loop, estime por **bootstrap** un intervalo de confianza al 95 % para la diferencia en la media de `H` entre dos hábitats. Aplícala a *conservado* vs. *pastizal*. ¿El intervalo incluye el 0? ¿Coincide con Tukey?
+
+### Preguntas de reflexión
+
+- ¿Qué supuestos del ANOVA y de la regresión lineal podrían violarse con datos de diversidad o abundancia? ¿Qué alternativas usarías?
+- Las parcelas están en un gradiente altitudinal: ¿qué problema podría surgir si parcelas cercanas son más parecidas entre sí (autocorrelación espacial)?
+- Si solo pudieras reportar un análisis a un tomador de decisiones sobre el efecto del ganado, ¿cuál elegirías y por qué?
+
+---
+
+## Solución sugerida
+
+`r if (!params$soluciones) "*Las soluciones están ocultas. Cambia* soluciones: true *en el encabezado YAML (o usa* Knit with Parameters*) para mostrarlas.*"`
+
+```{r sol-A, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte A ----
+shannon <- function(x) {
+  if (any(x < 0)) stop("Las abundancias no pueden ser negativas")
+  x <- x[x > 0]
+  p <- x / sum(x)
+  -sum(p * log(p))
+}
+
+riqueza <- function(x) sum(x > 0)
+
+shannon(c(10, 10, 10, 10))   # debe ser log(4) = 1.386
+```
+
+```{r sol-B, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte B ----
+cols_sp <- paste0("sp", 1:8)
+escarabajos$S <- NA
+escarabajos$N <- NA
+escarabajos$H <- NA
+
+for (i in 1:nrow(escarabajos)) {
+  x <- as.numeric(escarabajos[i, cols_sp])
+  escarabajos$S[i] <- riqueza(x)
+  escarabajos$N[i] <- sum(x)
+  escarabajos$H[i] <- shannon(x)
+}
+head(escarabajos[, c("habitat", "S", "N", "H")])
+```
+
+```{r sol-C, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte C ----
+t_pert <- t.test(H ~ perturbacion, data = escarabajos)
+t_pert
+apa(t_pert)
+
+cor.test(~ cobertura + S, data = escarabajos)
+cor.test(~ cobertura + S, data = escarabajos, method = "spearman", exact = FALSE)
+
+tab_ind <- table(escarabajos$habitat, escarabajos$sp_indicadora)
+tab_ind
+chisq.test(tab_ind)   # si hay frecuencias esperadas < 5, considerar fisher.test(tab_ind)
+```
+
+```{r sol-D, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte D ----
+pirateplot(H ~ habitat, data = escarabajos, ylab = "Shannon H'",
+           main = "Diversidad por hábitat")
+
+anova_h <- aov(H ~ habitat, data = escarabajos)
+summary(anova_h)
+TukeyHSD(anova_h)
+
+anova_h2 <- aov(H ~ habitat * perturbacion, data = escarabajos)
+summary(anova_h2)
+```
+
+```{r sol-E, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte E ----
+mod_h <- lm(H ~ altitud + cobertura, data = escarabajos)
+summary(mod_h)
+par(mfrow = c(2, 2)); plot(mod_h); par(mfrow = c(1, 1))
+
+mod_n <- glm(N ~ habitat + altitud, data = escarabajos, family = poisson)
+summary(mod_n)
+exp(coef(mod_n))   # efectos multiplicativos sobre la abundancia esperada
+# Revisar sobredispersión: deviance residual / gl >> 1 sugiere quasipoisson o binomial negativa
+mod_n$deviance / mod_n$df.residual
+
+mod_ind <- glm(sp_indicadora ~ cobertura + altitud, data = escarabajos,
+               family = binomial)
+summary(mod_ind)
+predict(mod_ind,
+        newdata = data.frame(cobertura = c(20, 50, 90), altitud = 1500),
+        type = "response")
+```
+
+```{r sol-F, eval=params$soluciones, echo=params$soluciones}
+# ---- Parte F ----
+boot_diferencia <- function(datos, grupo1, grupo2, B = 1000) {
+  h1 <- datos$H[datos$habitat == grupo1]
+  h2 <- datos$H[datos$habitat == grupo2]
+  difs <- vector("numeric", length = B)
+  for (b in 1:B) {
+    difs[b] <- mean(sample(h1, replace = TRUE)) - mean(sample(h2, replace = TRUE))
+  }
+  list(diferencia_observada = mean(h1) - mean(h2),
+       ic95 = quantile(difs, c(0.025, 0.975)))
+}
+
+set.seed(1)
+boot_diferencia(escarabajos, "conservado", "pastizal", B = 2000)
+```
