@@ -46,4 +46,6 @@ Esta clase tiene como objetivo la enseñanza de los diferentes lenguajes de prog
 
 [PythonistaMX](https://github.com/PythonistaMX/py101)
 
+[practical-stats-med](https://practical-stats-med-r.netlify.app/)
+
 
